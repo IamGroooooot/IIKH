@@ -4,6 +4,7 @@
 #include <iostream>
 
 class Date;
+class DBException;
 
 template<class T1, class T2>
 struct IsEqual {
@@ -21,6 +22,7 @@ protected:
 	std::map<_key, _value> db;
 public:
 	void Insert(_key k, _value v) { db.insert(std::pair<_key, _value>(k, v)); }
+
 	_value & Select(_key k) {
 		if (db.find(k) == db.end()) {
 			if (IsEqual<_key, std::string>::value) throw DBException(0, k.c_str());
@@ -29,10 +31,12 @@ public:
 		}
 		return (*db.find(k)).second;
 	}
+
 	void Update(_key k, _value v) {
 		db.erase(k);
 		db.insert(std::pair<_key, _value>(k, v));
 	}
+
 	void Delete(_key k) { db.erase(k); }
 	virtual void Show(_key k) = 0;
 	virtual void ShowAll() = 0;

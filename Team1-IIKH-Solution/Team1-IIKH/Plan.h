@@ -55,7 +55,7 @@ private:
 	Meal Breakfast, Lunch, Dinner;
 
 public:
-	Plan(std::string & n, std::vector<Meal> m) :
+	Plan(std::string && n, std::vector<Meal> m) :
 		name(n), Breakfast(m[0]), Lunch(m[1]), Dinner(m[2]) {};
 
 	const std::string & getName() { return name; }
