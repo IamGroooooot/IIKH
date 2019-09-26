@@ -5,9 +5,13 @@
 #include "Database.h"
 #include "Recipe.h"
 #include "Plan.h"
+#include "CSVParser.h"
 
 int main() {
 	PlanDB plan;
+	CSVParser parser;
+
+
 	try {
 		plan.Insert(Date(2019, 8, 28), Plan(std::string("Æò¹ü "), {
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
@@ -35,5 +39,19 @@ int main() {
 	catch (DBException e) {
 		e.resolve();
 	}
+
+	
+	std::vector<std::map<std::string, std::string>*> parsedData = parser.Read("IIKHRecipe.csv");
+
+	for (int i = 0; i < parsedData.size(); i++)
+	{
+		std::map<std::string, std::string>* temp = parsedData[i];
+		for (auto it = temp->cbegin(); it != temp->cend(); ++it)
+		{
+			std::cout << it->second << "\n";
+		}
+	}
+
+
 	return 0;
 }
