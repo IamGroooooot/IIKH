@@ -43,7 +43,7 @@ public:
 	}
 };
 
-class RecipeDB : public DataBase<std::string, Recipe> {
+class RecipeDB : public DataBase<std::string, Recipe>{
 private:
 
 public:
