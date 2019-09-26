@@ -3,12 +3,11 @@
 #include <map>
 #include <iostream>
 
-//Class declaration
+// class declaration
 class Date;
 class DBException;
 
-
-//Template declaration
+// template declaration
 template<class T1, class T2>
 struct IsEqual {
 	enum { value = false };
@@ -21,95 +20,76 @@ struct IsEqual<T, T> {
 
 template<class _key, class _value>
 
-
-//Control entire DB system
+// stores db map 
+// and controls entire DB system
 class DataBase {
-
 protected:
-
 	std::map<_key, _value> db;
 
 public:
+	// insert pair of key and value
+	void _insert(_key k, _value v) { db.insert(std::pair<_key, _value>(k, v)); }
 
-	//Insert pair of key and value
-	void Insert(_key k, _value v) { db.insert(std::pair<_key, _value>(k, v)); }
-
-
-
-	_value & Select(_key k) {
-
-
-		//If you do not find key (throws exception)
+	_value & _select(_key k) {
+		// if you do not find key (throws exception)
 		if (db.find(k) == db.end()) {
 			if (IsEqual<_key, std::string>::value) throw DBException(0, k.c_str());
 			else if (IsEqual<_key, Date>::value) throw DBException(1, k.c_str());
 			else throw DBException(2, k.c_str());
 		}
 
-
-		//If you find key (return value)
+		// if you find key (return value)
 		return (*db.find(k)).second;
 	}
 
-
-	//Delete pair of key and value, insert new pair of key and value
-	void Update(_key k, _value v) { 
+	// delete pair of key and value, insert new pair of key and value
+	void _update(_key k, _value v) { 
 		db.erase(k);
 		db.insert(std::pair<_key, _value>(k, v));
 	}
 
+	// delete pair of key and value
+	void _delete(_key k) { db.erase(k); }
 
-	//Delete pair of key and value
-	void Delete(_key k) { db.erase(k); }
+	// show items with given key
+	virtual void _show(_key k) = 0;
 
-
-
-	virtual void Show(_key k) = 0;
-
-
-
-	virtual void ShowAll() = 0;
-
-
-
-	virtual void Save() = 0;
+	// show all items in DB
+	virtual void _showAll() = 0;
+	
+	// save DB(items) to local
+	virtual void _save() = 0;
 };
 
-
-
-//Handle DB related error
+// performs handles DB related error
 class DBException {
-
 private:
-
 	int error;
 	std::string option;
 
-
 public:
-
+	// CTOR: initializes error and option
 	DBException(int e, const char * s) :
 		error(e), option(s) {};
 
-
+	// resolve DB Error
 	void resolve() {
-
-
+		// print error type
 		std::cout << "DB error (" << error << ") : ";
 		
-
+		// resolve by error type
 		switch (error) {
-			
-			//No searching key in RecipeDB
+			// no searching key in RecipeDB
 			case 0:
 				std::cout << "Key(" << option << ") is not in DB (RecipeDB)" << std::endl;
 				break;
 
-			//No searching key in PlanDB
+			// no searching key in PlanDB
 			case 1:
 				std::cout << "Key(" << option << ") is not in DB (PlanDB)"   << std::endl;
 				break;
-
+			
+			//  unknown error
 			default:
 				std::cout << "unknown error" << std::endl;
 		}

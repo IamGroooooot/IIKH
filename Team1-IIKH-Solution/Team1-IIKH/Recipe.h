@@ -13,53 +13,56 @@ private:
 	// Recipe's Name
 	std::string name;
 	// Recipe's Description
-	std::string descript;
+	std::string description;
 	// Recipe's Ingredients: it is set of ingredient(we use "string" for ingredient)
-	std::set<std::string> ingredient;
+	std::set<std::string> ingredients;
 	// Recipe's Expected Time it takes to cook. 
 	int time;
 
 public:
-	// CTOR: name, description, time, ingredient will be initialized
+	// CTOR: name, description, time, ingredients will be initialized
 	Recipe(std::string & n, std::string & d, int t, std::vector<std::string> i) :
-		name(n), descript(d), time(t), ingredient() {
-		// insert all ingredients to ingredient set
+		name(n), description(d), time(t), ingredients() {
+		// insert all ingredient to ingredients set
 		for (std::string s : i)
-			ingredient.insert(s);
+			ingredients.insert(s);
 	};
 
-	// returns Recipe name
-	const std::string & getName() { return name; }
-	// returns Recipe description
-	const std::string & getDescription() { return descript; }
-	// returns Recipe ingredient
-	const std::set<std::string> & getIngredients() { return ingredient; }
-	// returns Recipe time
-	int getTime() { return time; }
+	/* GET */
+	// get Recipe name
+	const std::string & getName() const { return name; }
+	// get Recipe description
+	const std::string & getDescription() const { return description; }
+	// get Recipe ingredients
+	const std::set<std::string> & getIngredients() const { return ingredients; }
+	// get Recipe time
+	int getTime() const { return time; }
 
+	/* SET */
 	// sets Recipe name
 	void setName(std::string & n) { name = n; }
 	// sets Recipe description
-	void setDescription(std::string & d) { descript = d; }
+	void setDescription(std::string & d) { description = d; }
 	// sets Recipe time
 	void setTime(int t) { time = t; }
 
-	// insert Recipe ingredient to ingredient set. and returns second stored value
-	bool addIngredient(std::string & n) { return ingredient.insert(n).second; }
-	// remove Recipe ingredient to ingredient set. and returns second stored value
-	bool removeIngredient(std::string & n) { return ingredient.erase(n) == 1; }
+	/* GET */
+	// insert Recipe ingredient to ingredients set. and returns second stored value
+	bool addIngredient(std::string & n) { return ingredients.insert(n).second; }
+	// remove Recipe ingredient to ingredients set. and returns second stored value
+	bool removeIngredient(std::string & n) { return ingredients.erase(n) == 1; }
 	// find if there is ingredient
-	bool searchIngredient(std::string & n) { return ingredient.find(n) != ingredient.end(); }
+	bool searchIngredient(std::string & n) { return ingredients.find(n) != ingredients.end(); }
 
 	// print Recipe datas
 	void print() {
 		std::cout << "Recipe Name : " << name << std::endl;
-		std::cout << "Ingredient : ";
-		for (std::string s : ingredient)
+		std::cout << "Ingredients : ";
+		for (std::string s : ingredients)
 			std::cout << s << ' ';
 		std::cout << std::endl;
 		std::cout << "Expected Time : " << time << std::endl;
-		std::cout << "Direction : " << descript << std::endl << std::endl;
+		std::cout << "Direction : " << description << std::endl << std::endl;
 	}
 };
 
@@ -69,14 +72,22 @@ class RecipeDB : public DataBase<std::string, Recipe> {
 private:
 
 public:
+	// CTOR
 	RecipeDB() {};
+	// DTOR
 	~RecipeDB() {};
-	void ShowAll() {
+
+	// select item by given date and print 
+	void _show(std::string key) {
+		this->_select(key).print();
+	}
+
+	// show all items in DB
+	void _showAll() {
 		for (std::pair<std::string, Recipe> s : db)
 			s.second.print();
 	}
-	void Show(std::string key) {
-		this->Select(key).print();
-	}
-	void Save() {};
+
+	// save to local
+	void _save() {};
 };
