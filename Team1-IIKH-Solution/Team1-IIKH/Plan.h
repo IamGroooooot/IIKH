@@ -99,10 +99,10 @@ public:
 	void setDinner(Meal & d) { Dinner = d; }
 
 	void print() {
-		std::cout << "�̸� : " << name << std::endl;
-		std::cout << "��ħ : "; Breakfast.print(); std::cout << std::endl;
-		std::cout << "���� : "; Lunch.print(); std::cout << std::endl;
-		std::cout << "���� : "; Dinner.print(); std::cout << std::endl;
+		std::cout << "Plan Name : " << name << std::endl;
+		std::cout << "Breakfast : "; Breakfast.print(); std::cout << std::endl;
+		std::cout << "Lunch : "; Lunch.print(); std::cout << std::endl;
+		std::cout << "Dinner : "; Dinner.print(); std::cout << std::endl << std::endl;
 	}
 };
 
