@@ -8,8 +8,14 @@
 #include "CSVParser.h"
 
 int main() {
-	PlanDB plan;
+	PlanDB planDB;
 	RecipeDB recipeDB;
+
+
+	cout << "------Print My Meal Plans------" << endl;
+	planDB._showAll();
+	cout << "------Print My Recipes------" << endl;
+	recipeDB._showAll();
 	/*
 	try {
 		Recipe* recipeElement1 = new Recipe(std::string("Á¶¤Ç¤©¶ó°Ô ¸ÀÀÖ´Â ·¹½ÃÇÇ 1"), std::string("°Ì³ª ¸ÀÀÖ°Ô ¸¸µç´Ù."), 100, {std::string("Àç·á1"), std::string("Àç·á2") });
@@ -23,27 +29,27 @@ int main() {
 	}
 
 	try {
-		plan._insert(Date(2019, 8, 28), Plan(std::string("Æò¹ü "), Date(2019, 8, 28), {
+		planDB._insert(Date(2019, 8, 28), Plan(std::string("Æò¹ü "), Date(2019, 8, 28), {
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") })
 			}));
-		plan._insert(Date(2019, 8, 30), Plan(std::string("Æò¹ü3"), Date(2019, 8, 30), {
+		planDB._insert(Date(2019, 8, 30), Plan(std::string("Æò¹ü3"), Date(2019, 8, 30), {
 			Meal({ std::string("¹ä"), std::string("°è¶õ ÈÄ¶óÀÌ") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") })
 			}));
-		plan._insert(Date(2019, 8, 29), Plan(std::string("Æò¹ü2"), Date(2019, 8, 29), {
+		planDB._insert(Date(2019, 8, 29), Plan(std::string("Æò¹ü2"), Date(2019, 8, 29), {
 			Meal({ std::string("¹ä"), std::string("±¹") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") })
 			}));
-		plan._insert(Date(2019, 8, 31), Plan(std::string("Æò¹ü4"), Date(2019, 8, 31), {
+		planDB._insert(Date(2019, 8, 31), Plan(std::string("Æò¹ü4"), Date(2019, 8, 31), {
 			Meal({ std::string("»÷µåÀ§Ä¡") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
 			Meal({ std::string("¹ä"), std::string("±èÄ¡") })
 			}));
-		plan._select(Date(2019, 8, 31));
+		planDB._select(Date(2019, 8, 31));
 		//plan._showAll();
 	}
 	catch (DBException e) {

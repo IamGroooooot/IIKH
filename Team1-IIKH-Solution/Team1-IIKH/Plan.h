@@ -71,6 +71,8 @@ public:
 	Date(char temp[9])
 	{
 		sscanf_s(temp, "%04d%02d%02d", &year, &month, &day);
+		sprintf_s(temp, 9, "%04d%02d%02d", year, month, day);
+		dateString.append(temp);
 	};
 	// CTOR
 	Date(int y, int m, int d) :
@@ -143,6 +145,7 @@ public:
 	// prints all meal plan
 	void print() {
 		std::cout << "Plan Name : " << name << std::endl;
+		std::cout << "Date : " << date.getDateString() << std::endl;
 		std::cout << "Breakfast : "; Breakfast.print(); std::cout << std::endl;
 		std::cout << "Lunch : "; Lunch.print(); std::cout << std::endl;
 		std::cout << "Dinner : "; Dinner.print(); std::cout << std::endl << std::endl;
@@ -196,8 +199,9 @@ public:
 
 	// show all items in DB
 	void _showAll() {
-		for (auto p : db)
+		for (auto p : db) {
 			p.second.print();
+		}
 	}
 	// save into local
 	void _save() {
