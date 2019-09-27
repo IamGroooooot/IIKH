@@ -21,7 +21,7 @@ private:
 
 public:
 	// CTOR: name, description, time, ingredients will be initialized
-	Recipe(std::string & n, std::string & d, int t, std::vector<std::string> i) :
+	Recipe(std::string && n, std::string && d, int t, std::vector<std::string> i) :
 		name(n), description(d), time(t), ingredients() {
 		// insert all ingredient to ingredients set
 		for (std::string s : i)
@@ -81,13 +81,58 @@ public:
 	void _show(std::string key) {
 		this->_select(key).print();
 	}
-
 	// show all items in DB
 	void _showAll() {
 		for (std::pair<std::string, Recipe> s : db)
 			s.second.print();
 	}
-
 	// save to local
 	void _save() {};
+
+	// used for saving Recipe Data
+	std::vector<std::map<std::string, std::string>*> _setRecipeDBData() {
+		// variable
+		std::vector<std::map<std::string, std::string>*> *saveData = new std::vector<std::map<std::string, std::string>*>();
+		int id = 0;
+		int index = 0;
+
+		// hard code keys 
+		std::vector<std::string> keys;
+		keys.push_back(std::string("index")); //0
+		keys.push_back(std::string("name")); //1
+		keys.push_back(std::string("description")); //2
+		keys.push_back(std::string("time")); //3
+		keys.push_back(std::string("ingredient0")); //4
+		keys.push_back(std::string("ingredient1")); //5
+		keys.push_back(std::string("ingredient2")); //6
+		keys.push_back(std::string("ingredient3")); //7
+
+		for (std::pair<std::string, Recipe> dbItemPair : db)
+		{
+			// get dbItem
+			Recipe targetRecipe = dbItemPair.second;
+
+			// one item
+			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
+
+			item->insert(make_pair(keys[0], std::to_string(id)));
+			item->insert(make_pair(keys[1], targetRecipe.getName()));
+			item->insert(make_pair(keys[2], targetRecipe.getDescription()));
+			item->insert(make_pair(keys[3], std::to_string(targetRecipe.getTime())));
+			
+			index = 4;
+			for (auto ingredient : targetRecipe.getIngredients())
+			{
+				item->insert(make_pair(keys[index], ingredient));
+				index++;
+			}
+
+			// push to vector
+			saveData->push_back(item);
+			// inc id
+			id++;
+		}
+
+		return *saveData;
+	}
 };

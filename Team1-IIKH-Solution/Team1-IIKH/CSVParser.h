@@ -6,6 +6,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+using namespace std;
 
 // stores path, delimiter
 // performs Writing, Reading Files to specified path
@@ -13,11 +14,14 @@ class CSVParser
 {
 private:
 	// used in case of fixed path
-	std::string rootPath = "";		
+	std::string rootPath = "";
 	// delimiter
 	char delimiter = ',';
 	// split string(tokenize)
 	std::vector<std::string> split(std::string, char, int);
+	// convert map type data to string to save it as csv
+	string convertToString(map<string, string>);
+	string convertToString(vector<string>, char);
 public:
 	// read text of given filename
 	std::vector<std::map<std::string, std::string>*> read(std::string);
@@ -56,9 +60,9 @@ std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string fil
 			parsedData->push_back(temp);
 		}
 	}
-	else 
+	else
 	{
-		std::cout << "Failed to open file. Check if "<< filename << "exists" << std::endl;
+		std::cout << "Failed to open file. Check if " << filename << "exists" << std::endl;
 	}
 
 	return *parsedData;
@@ -66,7 +70,29 @@ std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string fil
 
 // write file
 void CSVParser::write(std::string filename, std::vector<std::map<std::string, std::string>*> data) {
+	//get keys and convert to string
+	map<string, string> m_dataPiece = *data[0];
+	vector<string> v_keys;
+
+	for (map<string, string>::iterator it = m_dataPiece.begin(); it != m_dataPiece.end(); ++it)
+	{
+		v_keys.push_back(it->first);
+	}
+
+	//convert data to string
+	string buffer(convertToString(v_keys, delimiter));		//push converted key string to buffer 
+
+	for (auto item : data)
+	{
+		m_dataPiece = *item;
+
+		buffer.append(convertToString(m_dataPiece));
+
+		data.erase(data.begin());
+	}
+
 	std::ofstream writer(filename);
+	writer << buffer;
 }
 
 // split string by delimiter
@@ -87,6 +113,32 @@ std::vector<std::string> CSVParser::split(std::string str, char delimiter, int s
 			internal.push_back("");
 
 	return internal;
+}
+
+string CSVParser::convertToString(map<string, string> data)
+{
+	vector<string> v_values;
+
+	for (map<string, string>::iterator it = data.begin(); it != data.end(); ++it)
+	{
+		v_values.push_back(it->second);
+	}
+
+	return convertToString(v_values, delimiter);
+}
+
+string CSVParser::convertToString(vector<string> data, char delimiter)
+{
+	string buffer;
+	string delString(1, delimiter);
+	for (int i = 0; i < data.size(); i++)
+	{
+		buffer.append(data[i]);
+		if (i + 1 != data.size())
+			buffer.append(delString);
+	}
+	buffer.append("\n");
+	return buffer;
 }
 
 // 실행 예시

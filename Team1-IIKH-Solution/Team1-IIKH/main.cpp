@@ -9,8 +9,19 @@
 
 int main() {
 	PlanDB plan;
+	RecipeDB recipeDB;
 	CSVParser parser;
 
+	try {
+		Recipe* recipeElement1 = new Recipe(std::string("조ㅗㄹ라게 맛있는 레시피 1"), std::string("겁나 맛있게 만든다."), 100, {std::string("재료1"), std::string("재료2") });
+		recipeDB._insert(std::string("insert 1"), *recipeElement1);
+		Recipe* recipeElement2 = new Recipe(std::string("졸라ㅣ맛없는 레시피2"), std::string("겁나 맛없게 만든다."), 10, { std::string("재료1123"), std::string("재료2123") });
+		recipeDB._insert(std::string("insert 2"), *recipeElement2);
+		recipeDB._showAll();
+	}
+	catch (DBException e) {
+		e.resolve();
+	}
 
 	try {
 		plan._insert(Date(2019, 8, 28), Plan(std::string("평범 "), {
@@ -34,13 +45,13 @@ int main() {
 			Meal({ std::string("밥"), std::string("김치") })
 			}));
 		plan._select(Date(2019, 8, 31));
-		plan._showAll();
+		//plan._showAll();
 	}
 	catch (DBException e) {
 		e.resolve();
 	}
 
-
+	std::cout << "----------------File 불러오기 Test----------------" << std::endl;
 	
 	std::vector<std::map<std::string, std::string>*> parsedData = parser.read("IIKHRecipe.csv");
 
@@ -49,10 +60,23 @@ int main() {
 		std::map<std::string, std::string>* temp = parsedData[i];
 		for (auto it = temp->cbegin(); it != temp->cend(); ++it)
 		{
-			std::cout << it->second << "\n";
+			std::cout << it->first << " | " << it->second << std::endl;
 		}
+		std::cout << std::endl;
 	}
 
+	std::cout << "----------------세이브데이타 생성 Test----------------" << std::endl;
 
+	std::vector<std::map<std::string, std::string>*> savedData = recipeDB._setRecipeDBData();
+	for (int i = 0; i < savedData.size(); i++)
+	{
+		std::map<std::string, std::string>* temp = savedData[i];
+		for (auto item = temp->cbegin(); item != temp->cend(); ++item)
+		{
+			std::cout << item->first<<" | "<< item->second << std::endl;
+			
+		}
+		std::cout << std::endl;
+	}
 	return 0;
 }

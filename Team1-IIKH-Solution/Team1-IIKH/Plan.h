@@ -131,4 +131,11 @@ public:
 	}
 	// save into local
 	void _save() {};
+
+	std::vector<std::map<std::string, std::string>*> _setPlanDBData() {
+		std::vector<std::map<std::string, std::string>*> *saveData = new std::vector<std::map<std::string, std::string>*>();
+
+
+		return *saveData;
+	}
 };
