@@ -27,7 +27,7 @@ public:
 		for (std::string s : i)
 			ingredients.insert(s);
 	};
-
+	
 	/* GET */
 	// get Recipe name
 	const std::string & getName() const { return name; }
@@ -79,7 +79,30 @@ public:
 		// Load File
 		std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHRecipeDB.csv");
 
+		for (auto myMap : parsedData) {
+			// Construct Recipe Name from csv
+			std::string recipeName = myMap->find("name")->second;
 
+			// Construct Plan from csv
+			Recipe* recipePtr = new Recipe(
+				// Recipe name
+				std::string(myMap->find("name")->second),
+				// Recipe descrition
+				std::string(myMap->find("description")->second),
+				// Recipe time
+				atoi((myMap->find("time")->second).c_str()),
+				// Recipe ingredients
+				{
+					myMap->find("ingredient0")->second,
+					myMap->find("ingredient1")->second,
+					myMap->find("ingredient2")->second,
+					myMap->find("ingredient3")->second,
+					myMap->find("ingredient4")->second
+				}
+			);
+			// insert to DB
+			this->_insert(recipeName, *recipePtr);
+		}
 	};
 	// DTOR
 	~RecipeDB() {};
@@ -113,6 +136,7 @@ public:
 		keys.push_back(std::string("ingredient1")); //5
 		keys.push_back(std::string("ingredient2")); //6
 		keys.push_back(std::string("ingredient3")); //7
+		keys.push_back(std::string("ingredient4")); //8
 
 		for (std::pair<std::string, Recipe> dbItemPair : db)
 		{

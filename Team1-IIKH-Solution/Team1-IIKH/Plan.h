@@ -161,26 +161,26 @@ public:
 		// Load File
 		std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHPlanDB.csv");
 		for (auto myMap : parsedData) {
-			// Construct Date
+			// Construct Date from csv
 			Date* datePtr = new Date(    strdup(  ( myMap->find("date")->second.c_str() )  )    );
+
+			// Construct Plan from csv
 			Plan* planPtr = new Plan( 
-				std::string("플랜 이름 1"),
+				// plan name
+				std::string(myMap->find("name")->second),
 				*datePtr, 
 				{
 					//아침
-					Meal({ std::string("샌드위치 레시피") }),
+					Meal( CSVParser::instance().split(  myMap->find("breakfast")->second  , '$', -1  ) ),
 					//점심
-					Meal({ std::string("밥 레시피"), std::string("김치 레시피") }),
+					Meal( CSVParser::instance().split(  myMap->find("lunch")->second  , '$', -1  ) ),
 					//저녁
-					Meal({ std::string("밥 레시피"), std::string("김치 래시피") })
+					Meal( CSVParser::instance().split(  myMap->find("dinner")->second  , '$', -1) )
 				}
 			);
+			// insert to DB
 			this->_insert(*datePtr,*planPtr);
 		}
-		
-
-		//temp->insert(make_pair(*(new Date(strdup(keys[i].c_str()))), values[i]));
-
 	};
 	// DTOR
 	~PlanDB() {};

@@ -19,8 +19,6 @@ private:
 	std::string rootPath = "";
 	// delimiter
 	char delimiter = ',';
-	// split string(tokenize)
-	std::vector<std::string> split(std::string, char, int);
 	// convert map type data to string to save it as csv
 	string convertToString(map<string, string>);
 	string convertToString(vector<string>, char);
@@ -33,6 +31,8 @@ public:
 		}
 		return *instancePtr;
 	}
+	// split string(tokenize)
+	std::vector<std::string> split(std::string, char, int);
 	// read text of given filename
 	std::vector<std::map<std::string, std::string>*> read(std::string);
 	// write text to given path
