@@ -73,7 +73,14 @@ private:
 
 public:
 	// CTOR
-	RecipeDB() {};
+	RecipeDB() {
+		// Load DB
+		std::cout << "[디버그] recipe DB 생성" << std::endl;
+		// Load File
+		std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHRecipeDB.csv");
+
+
+	};
 	// DTOR
 	~RecipeDB() {};
 

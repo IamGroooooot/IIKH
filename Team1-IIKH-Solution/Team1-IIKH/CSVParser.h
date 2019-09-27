@@ -13,6 +13,8 @@ using namespace std;
 class CSVParser
 {
 private:
+	static CSVParser* instancePtr;
+
 	// used in case of fixed path
 	std::string rootPath = "";
 	// delimiter
@@ -23,6 +25,14 @@ private:
 	string convertToString(map<string, string>);
 	string convertToString(vector<string>, char);
 public:
+	// singleton
+	static CSVParser& instance() {
+		// Lazy initialization
+		if (instancePtr == NULL) {
+			instancePtr = new CSVParser();
+		}
+		return *instancePtr;
+	}
 	// read text of given filename
 	std::vector<std::map<std::string, std::string>*> read(std::string);
 	// write text to given path
@@ -140,6 +150,7 @@ string CSVParser::convertToString(vector<string> data, char delimiter)
 	buffer.append("\n");
 	return buffer;
 }
+
 
 // 실행 예시
 /*

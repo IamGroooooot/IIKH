@@ -27,6 +27,8 @@ protected:
 	std::map<_key, _value> db;
 
 public:
+	// static std::string recipeKeys[] = { "index" ,"name","description","time","ingredient0","ingredient1","ingredient2","ingredient3","ingredient4" };
+
 	// insert pair of key and value
 	void _insert(_key k, _value v) { db.insert(std::pair<_key, _value>(k, v)); }
 
