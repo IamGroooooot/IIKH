@@ -10,7 +10,7 @@
 int main() {
 	PlanDB plan;
 	RecipeDB recipeDB;
-
+	/*
 	try {
 		Recipe* recipeElement1 = new Recipe(std::string("조ㅗㄹ라게 맛있는 레시피 1"), std::string("겁나 맛있게 만든다."), 100, {std::string("재료1"), std::string("재료2") });
 		recipeDB._insert(std::string("insert 1"), *recipeElement1);
@@ -78,4 +78,5 @@ int main() {
 		std::cout << std::endl;
 	}
 	return 0;
+	*/
 }

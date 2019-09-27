@@ -158,9 +158,10 @@ public:
 	// CTOR
 	PlanDB() {
 		// msg
-		std::cout << "[디버그] Plan DB 생성" << std::endl;
+		//std::cout << "[디버그] Plan DB 생성" << std::endl;
 		// Load File
 		std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHPlanDB.csv");
+
 		for (auto myMap : parsedData) {
 			// Construct Date from csv
 			Date* datePtr = new Date(    strdup(  ( myMap->find("date")->second.c_str() )  )    );
@@ -179,10 +180,12 @@ public:
 					Meal( CSVParser::instance().split(  myMap->find("dinner")->second  , '$', -1) )
 				}
 			);
+
 			// insert to DB
 			this->_insert(*datePtr,*planPtr);
 		}
-	};
+		//std::cout << "[디버그] Plan DB 생성 완료" << std::endl;
+	}
 	// DTOR
 	~PlanDB() {};
 
