@@ -118,7 +118,9 @@ public:
 			s.second.print();
 	}
 	// save to local
-	void _save() {};
+	void _save() {
+		CSVParser::instance().write("IIKHRecipeDB.csv", _setRecipeDBData());
+	};
 
 	// used for saving Recipe Data
 	std::vector<std::map<std::string, std::string>*> _setRecipeDBData() {

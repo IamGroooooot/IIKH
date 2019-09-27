@@ -200,7 +200,9 @@ public:
 			p.second.print();
 	}
 	// save into local
-	void _save() {};
+	void _save() {
+		CSVParser::instance().write("IIKHPlanDB.csv", _setPlanDBData());
+	};
 
 
 	// used for saving Plan Data
