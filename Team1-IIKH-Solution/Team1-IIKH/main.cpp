@@ -10,7 +10,6 @@
 int main() {
 	PlanDB plan;
 	RecipeDB recipeDB;
-	CSVParser parser;
 
 	try {
 		Recipe* recipeElement1 = new Recipe(std::string("조ㅗㄹ라게 맛있는 레시피 1"), std::string("겁나 맛있게 만든다."), 100, {std::string("재료1"), std::string("재료2") });
@@ -53,7 +52,7 @@ int main() {
 
 	std::cout << "----------------File 불러오기 Test----------------" << std::endl;
 	
-	std::vector<std::map<std::string, std::string>*> parsedData = parser.read("IIKHRecipe.csv");
+	std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHRecipe.csv");
 
 	for (int i = 0; i < parsedData.size(); i++)
 	{

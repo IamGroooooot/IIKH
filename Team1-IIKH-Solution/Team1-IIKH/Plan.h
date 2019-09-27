@@ -5,6 +5,7 @@
 
 #include "Database.h"
 #include "Recipe.h"
+#include "CSVParser.h"
 
 // stores a lot of RecipeNames
 class Meal {

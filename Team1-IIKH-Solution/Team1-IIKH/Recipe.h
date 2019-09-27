@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Database.h"
+#include "CSVParser.h"
 
 // stores recipe's name, description, ingredients, time
 // and performs action related to recipe and it's member.

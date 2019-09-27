@@ -13,8 +13,10 @@ using namespace std;
 class CSVParser
 {
 private:
-	static CSVParser* instancePtr;
-
+	// Empty CTOR
+	CSVParser() { };
+	
+	
 	// used in case of fixed path
 	std::string rootPath = "";
 	// delimiter
@@ -25,10 +27,9 @@ private:
 public:
 	// singleton
 	static CSVParser& instance() {
-		// Lazy initialization
-		if (instancePtr == NULL) {
-			instancePtr = new CSVParser();
-		}
+		// instance var. for sigleton
+		static CSVParser* instancePtr = new CSVParser();
+		
 		return *instancePtr;
 	}
 	// split string(tokenize)
