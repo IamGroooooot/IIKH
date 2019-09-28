@@ -55,7 +55,7 @@ public:
 	// find if there is ingredient
 	bool searchIngredient(std::string & n) { return ingredients.find(n) != ingredients.end(); }
 
-	// print Recipe datas
+	// print Recipe data
 	void print() {
 		std::cout << "Recipe Name : " << name << std::endl;
 		std::cout << "Ingredients : ";

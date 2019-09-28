@@ -16,7 +16,6 @@ private:
 	// Empty CTOR
 	CSVParser() { };
 	
-	
 	// used in case of fixed path
 	std::string rootPath = "";
 	// delimiter
@@ -153,7 +152,7 @@ string CSVParser::convertToString(vector<string> data, char delimiter)
 }
 
 
-// ½ÇÇà ¿¹½Ã
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 /*
 void main()
 {

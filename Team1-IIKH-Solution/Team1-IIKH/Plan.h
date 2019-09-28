@@ -2,6 +2,7 @@
 #include <set>
 #include <string>
 #include <iostream>
+#include <string.h>
 
 #include "Database.h"
 #include "Recipe.h"
@@ -167,7 +168,7 @@ public:
 
 		for (auto myMap : parsedData) {
 			// Construct Date from csv
-			Date* datePtr = new Date(    strdup(  ( myMap->find("date")->second.c_str() )  )    );
+			Date* datePtr = new Date(strdup(( myMap->find("date")->second.c_str())));
 
 			// Construct Plan from csv
 			Plan* planPtr = new Plan( 
