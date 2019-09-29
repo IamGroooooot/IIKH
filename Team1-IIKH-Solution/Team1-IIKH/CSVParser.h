@@ -151,7 +151,6 @@ string CSVParser::convertToString(vector<string> data, char delimiter)
 	return buffer;
 }
 
-
 // ���� ����
 /*
 void main()

@@ -26,7 +26,6 @@ int main() {
 	RecipeDB recipeDB;
 	//CSVParser parser;
 
-
     std::vector<std::string> menu;
 
     //Add menu here
@@ -36,52 +35,12 @@ int main() {
     addMenu(menu,"ADD PLAN");
     addMenu(menu,"VIEW PLAN");
     addMenu(menu,"QUIT");
-
-	try {
-		Recipe* recipeElement1 = new Recipe(std::string("Á¶¤Ç¤©¶ó°Ô ¸ÀÀÖ´Â ·¹½ÃÇÇ 1"), std::string("°Ì³ª ¸ÀÀÖ°Ô ¸¸µç´Ù."), 100, {std::string("Àç·á1"), std::string("Àç·á2") });
-		recipeDB._insert(std::string("insert 1"), *recipeElement1);
-		Recipe* recipeElement2 = new Recipe(std::string("Á¹¶ó¤Ó¸À¾ø´Â ·¹½ÃÇÇ2"), std::string("°Ì³ª ¸À¾ø°Ô ¸¸µç´Ù."), 10, { std::string("Àç·á1123"), std::string("Àç·á2123") });
-		recipeDB._insert(std::string("insert 2"), *recipeElement2);
-		recipeDB._showAll();
-	}
-	catch (DBException e) {
-		e.resolve();
-	}
-
-	try {
-			planDB._insert(Date(2019, 8, 28), Plan(std::string("Æò¹ü "), Date(2019, 8, 28), {
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") })
-				}));
-			planDB._insert(Date(2019, 8, 30), Plan(std::string("Æò¹ü3"), Date(2019, 8, 30), {
-				Meal({ std::string("¹ä"), std::string("°è¶õ ÈÄ¶óÀÌ") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") })
-				}));
-			planDB._insert(Date(2019, 8, 29), Plan(std::string("Æò¹ü2"), Date(2019, 8, 29), {
-				Meal({ std::string("¹ä"), std::string("±¹") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") })
-				}));
-			planDB._insert(Date(2019, 8, 31), Plan(std::string("Æò¹ü4"), Date(2019, 8, 31), {
-				Meal({ std::string("»÷µåÀ§Ä¡") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") }),
-				Meal({ std::string("¹ä"), std::string("±èÄ¡") })
-				}));
-			planDB._select(Date(2019, 8, 31));
-			//plan._showAll();
-		}
-		catch (DBException e) {
-			e.resolve();
-		}
-
-
-
+	/*
 	cout << "------Print My Meal Plans------" << endl;
 	planDB._showAll();
 	cout << "------Print My Recipes------" << endl;
 	recipeDB._showAll();
+	*/
 
     while(true)
     {
@@ -90,50 +49,6 @@ int main() {
     }
 
 
-	
-
-	std::cout << "----------------File ºÒ·¯¿À±â Test----------------" << std::endl;
-	
-	std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHRecipe.csv");
-
-	for (int i = 0; i < parsedData.size(); i++)
-	{
-		std::map<std::string, std::string>* temp = parsedData[i];
-		for (auto it = temp->cbegin(); it != temp->cend(); ++it)
-		{
-			std::cout << it->first << " | " << it->second << std::endl;
-		}
-		std::cout << std::endl;
-	}
-
-	std::cout << "----------------¼¼ÀÌºêµ¥ÀÌÅ¸ »ý¼º Test----------------" << std::endl;
-
-	std::vector<std::map<std::string, std::string>*> savedData = recipeDB._setRecipeDBData();
-	for (int i = 0; i < savedData.size(); i++)
-	{
-		std::map<std::string, std::string>* temp = savedData[i];
-		for (auto item = temp->cbegin(); item != temp->cend(); ++item)
-		{
-			std::cout << item->first<<" | "<< item->second << std::endl;
-			
-		}
-		std::cout << std::endl;
-	}
-	return 0;
-
-	// std::vector<std::map<std::string, std::string>*> parsedData = parser.Read("IIKHRecipe.csv");
-
-	// for (int i = 0; i < parsedData.size(); i++)
-	// {
-	// 	std::map<std::string, std::string>* temp = parsedData[i];
-	// 	for (auto it = temp->cbegin(); it != temp->cend(); ++it)
-	// 	{
-	// 		std::cout << it->second << "\n";
-	// 	}
-	// }
-
-
-	// return 0;
 }
 
 void addMenu(std::vector<std::string> &menu, std::string instruction){menu.push_back(instruction);}
