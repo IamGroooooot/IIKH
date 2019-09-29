@@ -37,15 +37,9 @@ public:
 	void deleteRecipes(std::string & target) { recipeNames.erase(target); }
 
 	std::string getRecipeNamesIntoString() {
-		//int maxCnt = 0;
 		for (auto _recipe : recipeNames) {
 			recipeString.append(_recipe);
 			recipeString.append("$");
-
-			//maxCnt++;
-			//if (maxCnt == 4) {
-			//	break;
-			//}
 		}
 
 		return recipeString;

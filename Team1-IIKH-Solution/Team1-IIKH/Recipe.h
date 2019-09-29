@@ -48,14 +48,14 @@ public:
 	// sets Recipe time
 	void setTime(int t) { time = t; }
 
-	/* GET */
+	/* Functions */
 	// insert Recipe ingredient to ingredients set. and returns second stored value
 	bool addIngredient(std::string & n) { return ingredients.insert(n).second; }
 	// remove Recipe ingredient to ingredients set. and returns second stored value
 	bool removeIngredient(std::string & n) { return ingredients.erase(n) == 1; }
 	// find if there is ingredient
 	bool searchIngredient(std::string & n) { return ingredients.find(n) != ingredients.end(); }
-
+	// make ingredients into single String
 	std::string getIngredientsIntoString() {
 		for (auto ingredient : ingredients) {
 			ingredientString.append(ingredient);
