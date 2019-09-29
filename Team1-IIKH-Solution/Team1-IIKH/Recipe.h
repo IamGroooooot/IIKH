@@ -108,13 +108,7 @@ public:
 				// Recipe time
 				atoi((myMap->find("time")->second).c_str()),
 				// Recipe ingredients
-				{
-					myMap->find("ingredient0")->second,
-					myMap->find("ingredient1")->second,
-					myMap->find("ingredient2")->second,
-					myMap->find("ingredient3")->second,
-					myMap->find("ingredient4")->second
-				}
+				CSVParser::instance().split(myMap->find("ingredients")->second,'$',-1)
 			);
 			// insert to DB
 			this->_insert(recipeName, *recipePtr);
@@ -150,11 +144,7 @@ public:
 		keys.push_back(std::string("name")); //1
 		keys.push_back(std::string("description")); //2
 		keys.push_back(std::string("time")); //3
-		keys.push_back(std::string("ingredient0")); //4
-		keys.push_back(std::string("ingredient1")); //5
-		keys.push_back(std::string("ingredient2")); //6
-		keys.push_back(std::string("ingredient3")); //7
-		keys.push_back(std::string("ingredient4")); //8
+		keys.push_back(std::string("ingredients")); //4
 
 		for (std::pair<std::string, Recipe> dbItemPair : db)
 		{
@@ -168,18 +158,7 @@ public:
 			item->insert(make_pair(keys[1], targetRecipe.getName()));
 			item->insert(make_pair(keys[2], targetRecipe.getDescription()));
 			item->insert(make_pair(keys[3], std::to_string(targetRecipe.getTime())));
-			
-			index = 4;
-			for (auto ingredient : targetRecipe.getIngredients())
-			{
-				item->insert(make_pair(keys[index], ingredient));
-				index++;
-			}
-
-			for (index = index; index < 9; index++)
-			{
-				item->insert(make_pair(keys[index], std::string("")));
-			}
+			item->insert(make_pair(keys[4], targetRecipe.getIngredientsIntoString()));
 
 			// push to vector
 			saveData->push_back(item);
