@@ -50,11 +50,10 @@ int main() {
 		cin.ignore();
 		getchar();
     }
-
-
 }
 
 void addMenu(std::vector<std::string> &menu, std::string instruction){menu.push_back(instruction);}
+
 void printMenu(std::vector<std::string> &menu)
 {
     std::cout<<"IIIIIIIIIIIIIIIIIIIIKKKKKKKKK    KKKKKKKHHHHHHHHH     HHHHHHHHH\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nII::::::IIII::::::IIK:::::::K   K::::::KHH::::::H     H::::::HH\n  I::::I    I::::I  KK::::::K  K:::::KKK  H:::::H     H:::::H  \n  I::::I    I::::I    K:::::K K:::::K     H:::::H     H:::::H  \n  I::::I    I::::I    K::::::K:::::K      H::::::HHHHH::::::H  \n  I::::I    I::::I    K:::::::::::K       H:::::::::::::::::H  \n  I::::I    I::::I    K:::::::::::K       H:::::::::::::::::H  \n  I::::I    I::::I    K::::::K:::::K      H::::::HHHHH::::::H  \n  I::::I    I::::I    K:::::K K:::::K     H:::::H     H:::::H  \n  I::::I    I::::I  KK::::::K  K:::::KKK  H:::::H     H:::::H  \nII::::::IIII::::::IIK:::::::K   K::::::KHH::::::H     H::::::HH\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nIIIIIIIIIIIIIIIIIIIIKKKKKKKKK    KKKKKKKHHHHHHHHH     HHHHHHHHH"<<std::endl;
@@ -118,16 +117,25 @@ void selectMenu(std::vector<std::string> &menu, PlanDB &planDB, RecipeDB &recipe
             }
         }
 }
+
 void searchRecipe(RecipeDB& recipeDB)
 {
     std::cout<<"Search : "<<std::flush;
 	std::cin.ignore();
-	std::string searchM;std::getline(std::cin,searchM);			
-	
-	Recipe recipe = recipeDB._select(searchM);
-	recipe.print();
-	
+	std::string targetRecipe;
+	std::getline(std::cin, targetRecipe);
+
+	try
+	{
+		Recipe recipe = recipeDB._select(targetRecipe);
+		recipe.print();
+	}
+	catch (DBException e)
+	{
+		e.resolve();
+	}
 }
+
 void addRecipe(RecipeDB& recipeDB)
 {
 	std::cout<<"You will enter recipe information in [[ NAME -> DESCRIPTION -> TIME -> INGREDIENTS ]] order"<<std::endl;
@@ -155,6 +163,7 @@ void addRecipe(RecipeDB& recipeDB)
 		e.resolve();
 	}
 }
+
 void addPlan(PlanDB& planDB)
 {	
 	std::cout<<"You will enter plan information in [[ YEAR -> MONTH -> DAY -> DAYNAME -> BREAKFAST -> LUNCH -> DINNER ]] order"<<std::endl;
@@ -167,6 +176,7 @@ void addPlan(PlanDB& planDB)
 	Meal dinner	   = addMeal("Dinner   ");
 	planDB._insert(Date(year,month,day),Plan(dayName.c_str(),Date(year,month,day),{breakfast,lunch,dinner}));
 }
+
 Meal addMeal(std::string mealName)
 {
 	std::cout<<mealName<<" (If you want to stop enter \"stop\" ) : "<<std::flush;
