@@ -18,13 +18,11 @@ void addPlan(PlanDB& planDB);
 Meal addMeal(std::string mealName);
 
 int main() {
-
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(NULL);
 
 	PlanDB planDB;
 	RecipeDB recipeDB;
-	//CSVParser parser;
 
     std::vector<std::string> menu;
 
@@ -44,8 +42,13 @@ int main() {
 
     while(true)
     {
+		system("CLS");
         printMenu(menu);
         selectMenu(menu,planDB,recipeDB);
+		
+		cout << "Press anykey to continue" << endl;
+		cin.ignore();
+		getchar();
     }
 
 
@@ -62,6 +65,7 @@ void printMenu(std::vector<std::string> &menu)
 void selectMenu(std::vector<std::string> &menu, PlanDB &planDB, RecipeDB &recipeDB)
 {
         int selectedNum;std::cin>>selectedNum;
+		system("CLS");
         std::cout<<"You've selected ["<<selectedNum<<"] ";
         switch (selectedNum)
         {
@@ -114,8 +118,10 @@ void searchRecipe(RecipeDB& recipeDB)
     std::cout<<"Search : "<<std::flush;
 	std::cin.ignore();
 	std::string searchM;std::getline(std::cin,searchM);			
+	
 	Recipe recipe = recipeDB._select(searchM);
 	recipe.print();
+	
 }
 void addRecipe(RecipeDB& recipeDB)
 {
