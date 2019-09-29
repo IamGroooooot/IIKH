@@ -147,8 +147,8 @@ public:
 
 	// prints all meal plan
 	void print() {
-		std::cout << " Meal plan for <" << date.getDateString() << "> **" << std::endl;
-		std::cout << " Plan Name	: " << name<<endl;
+		std::cout << " ***** Meal plan for <" << date.getDateString() << "> *****" << std::endl;
+		std::cout << " Plan Name	: " << name<<endl<<" ************************************"<<endl;
 		std::cout << " >> Breakfast"; Breakfast.print(); std::cout << std::endl;
 		std::cout << " >> Lunch"; Lunch.print(); std::cout << std::endl;
 		std::cout << " >> Dinner"; Dinner.print(); std::cout << std::endl << std::endl;
