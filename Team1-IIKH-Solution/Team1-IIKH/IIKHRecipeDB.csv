@@ -1,3 +1,5 @@
-index,name,description,time,ingredient0,ingredient1,ingredient2,ingredient3,ingredient4
-0,RecipeName0,조리법 0,30분,재료0-0,재료0-1,재료0-2,재료0-3,재료0-4
-1,RecipeName1,조리법 1,40분,재료1-0,재료1-1,재료1-2,재료1-3,재료1-4
+description,index,ingredients,name,time
+1,0,1$12$3$4$5$6$7$8$9$,1,1
+1,1,1$,123,1
+이것은 설명이다,2,재료1$재료2$재료3$,이것은 이름이다,10
+이것은 설명이다2,3,재료1$재료2$재료4$,이것은 이름이다2,11

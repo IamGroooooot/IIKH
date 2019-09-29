@@ -1,3 +1,4 @@
-index,name,date,breakfast,lunch,dinner
-0,planName0,20041230,br0,ln0,dn0
-1,planName1,20031230,br1,ln1,dn1
+breakfast,date,dinner,index,lunch,name
+미역국$,19981003,,0,김치$김치 김치 야ㅣ양$,주형이 태어남
+br1$,20031230,dn1$,1,ln1$,planName1
+br0$,20041230,dn0$,2,ln0$,planName0

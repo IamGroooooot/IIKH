@@ -98,8 +98,11 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 		m_dataPiece = *item;
 		std::cout << convertToString(m_dataPiece) << std::endl;
 		buffer.append(convertToString(m_dataPiece));
+<<<<<<< HEAD
 
 		//data.erase(data.begin());
+=======
+>>>>>>> dde599a183d08baa2a156e3f4b619477423fa5b6
 	}
 
 	std::ofstream writer(filename);
