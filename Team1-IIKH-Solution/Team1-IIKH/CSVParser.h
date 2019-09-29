@@ -94,11 +94,12 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 
 	for (auto item : data)
 	{
-		m_dataPiece = *item;
 
+		m_dataPiece = *item;
+		std::cout << convertToString(m_dataPiece) << std::endl;
 		buffer.append(convertToString(m_dataPiece));
 
-		data.erase(data.begin());
+		//data.erase(data.begin());
 	}
 
 	std::ofstream writer(filename);
