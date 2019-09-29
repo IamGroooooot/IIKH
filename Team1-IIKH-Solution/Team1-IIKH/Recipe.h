@@ -161,7 +161,7 @@ public:
 				index++;
 			}
 
-			for (int index = index; index < 9; index++)
+			for (index = index; index < 9; index++)
 			{
 				item->insert(make_pair(keys[index], std::string("")));
 			}

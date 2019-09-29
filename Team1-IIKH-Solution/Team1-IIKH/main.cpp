@@ -104,6 +104,10 @@ void selectMenu(std::vector<std::string> &menu, PlanDB &planDB, RecipeDB &recipe
             case 6:
             {
                 std::cout<<"to QUIT..."<<std::endl;
+
+				//planDB._save();
+				recipeDB._save();
+
                 exit(0);
                 break;
             }

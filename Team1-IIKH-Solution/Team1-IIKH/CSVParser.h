@@ -96,6 +96,8 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 	{
 		m_dataPiece = *item;
 
+
+		cout << "------------------" << convertToString(m_dataPiece) << endl;
 		buffer.append(convertToString(m_dataPiece));
 
 		data.erase(data.begin());
