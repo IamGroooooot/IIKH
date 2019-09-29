@@ -116,9 +116,9 @@ public:
 	void addRecipe()
 	{
 		std::cout << "You will enter recipe information in [[ NAME -> DESCRIPTION -> TIME -> INGREDIENTS ]] order" << std::endl;
-		std::cout << "Name        : " << std::flush;	std::cin.clear();	std::cin.ignore();	std::string name;			std::getline(std::cin, name);
-		std::cout << "Description : " << std::flush;	std::cin.clear();						std::string description;	std::getline(std::cin, description);
-		std::cout << "Time(min)   : " << std::flush;	std::cin.clear();						int time;					std::cin >> time;
+		std::cout << "Name			: " << std::flush;	std::cin.clear();	std::cin.ignore();	std::string name;			std::getline(std::cin, name);
+		std::cout << "Description	: " << std::flush;	std::cin.clear();						std::string description;	std::getline(std::cin, description);
+		std::cout << "Cooking Time(min)	: " << std::flush;	std::cin.clear();						int time;					std::cin >> time;
 		std::cout << "Ingredients (If you want to stop enter \"stop\" ) : " << std::flush;
 		std::vector<std::string> ingredients;
 		std::cin.ignore();
