@@ -163,8 +163,6 @@ private:
 public:
 	// CTOR
 	PlanDB() {
-		// msg
-		//std::cout << "[디버그] Plan DB 생성" << std::endl;
 		// Load File
 		std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHPlanDB.csv");
 
@@ -210,7 +208,6 @@ public:
 	void _save() {
 		CSVParser::instance().write("IIKHPlanDB.csv", _setPlanDBData());
 	};
-
 
 	// used for saving Plan Data
 	std::vector<std::map<std::string, std::string>*> _setPlanDBData() {
@@ -260,7 +257,6 @@ public:
 				}
 				item->insert(make_pair(myKey, std::string("EmptyData")));
 			}
-			
 			// push to vector
 			savedData->push_back(item);
 		}

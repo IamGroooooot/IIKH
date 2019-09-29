@@ -23,6 +23,7 @@ private:
 	// convert map type data to string to save it as csv
 	string convertToString(map<string, string>);
 	string convertToString(vector<string>, char);
+
 public:
 	// singleton
 	static CSVParser& instance() {
@@ -43,7 +44,8 @@ public:
 // reads text of given filename and returns
 std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string filename) {
 	std::ifstream reader(filename);
-
+	
+	// variable
 	std::vector<std::map<std::string, std::string>*> *parsedData = new std::vector<std::map<std::string, std::string>*>();
 
 	// check if c stream is opened
@@ -52,8 +54,6 @@ std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string fil
 		std::string line;
 		getline(reader, line);
 		std::vector<std::string> keys = split(line, delimiter, -1);
-
-		int index = 0;
 
 		// read text by line 
 		while (getline(reader, line))
@@ -72,7 +72,7 @@ std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string fil
 	}
 	else
 	{
-		std::cout << "Failed to open file. Check if " << filename << " file exists" << std::endl;
+		std::cout << "Failed to open file(" << filename << ")" << std::endl;
 	}
 
 	return *parsedData;
@@ -93,15 +93,18 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 	// push converted key string to buffer 
 	string buffer(convertToString(v_keys, delimiter));		
 
+	// append all data to save in csv format
 	for (auto item : data)
 	{
 		m_dataPiece = *item;
-		// write 함수용 fakeData인 경우 skip
+		// if it is fake data for keys, skip it
 		if (m_dataPiece.begin()->second.compare("EmptyData") == 0)
 			break;
+		// append all datas in csv manner
 		buffer.append(convertToString(m_dataPiece));
 	}
 
+	// write to buffer
 	std::ofstream writer(filename);
 	writer << buffer;
 }

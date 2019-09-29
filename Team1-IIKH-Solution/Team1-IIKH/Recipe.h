@@ -172,11 +172,12 @@ public:
 
 			// push to vector
 			savedData->push_back(item);
+
 			// inc id
 			id++;
 		}
 
-		// In case of Empty case (write함수에서 key를 설정하는 방식으로 인해 빈 맵이 있어야함)
+		// In case of Empty case create fake data for key(write함수에서 key를 설정하는 방식으로 인해 빈 맵이 있어야함)
 		if (savedData->size() == 0) {
 			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
 			bool isFirst = true;

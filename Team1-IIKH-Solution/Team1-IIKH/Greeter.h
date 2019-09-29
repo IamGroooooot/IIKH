@@ -15,7 +15,7 @@ private:
 	PlanDB planDB;
 	std::vector<std::string> menu;
 public:
-
+	// CTOR: vector<string> menu, RecipeDB, PlanDB
 	Greeter(std::vector<std::string>& _menu, RecipeDB& _recipeDB, PlanDB& _planDB) :
 		menu(_menu), recipeDB(_recipeDB), planDB(_planDB) {
 		addMenu("SEARCH RECIPE");
@@ -26,22 +26,26 @@ public:
 		addMenu("QUIT");
 	};
 
+	void addMenu(std::string instruction) { 
+		menu.push_back(instruction); 
+	}
 
-
-	void addMenu(std::string instruction) { menu.push_back(instruction); }
-	void printMenu()
-	{
+	void printMenu() {
+		// print logo and menu
 		std::cout << "IIIIIIIIIIIIIIIIIIIIKKKKKKKKK    KKKKKKKHHHHHHHHH     HHHHHHHHH\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nII::::::IIII::::::IIK:::::::K   K::::::KHH::::::H     H::::::HH\n  I::::I    I::::I  KK::::::K  K:::::KKK  H:::::H     H:::::H  \n  I::::I    I::::I    K:::::K K:::::K     H:::::H     H:::::H  \n  I::::I    I::::I    K::::::K:::::K      H::::::HHHHH::::::H  \n  I::::I    I::::I    K:::::::::::K       H:::::::::::::::::H  \n  I::::I    I::::I    K:::::::::::K       H:::::::::::::::::H  \n  I::::I    I::::I    K::::::K:::::K      H::::::HHHHH::::::H  \n  I::::I    I::::I    K:::::K K:::::K     H:::::H     H:::::H  \n  I::::I    I::::I  KK::::::K  K:::::KKK  H:::::H     H:::::H  \nII::::::IIII::::::IIK:::::::K   K::::::KHH::::::H     H::::::HH\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nIIIIIIIIIIIIIIIIIIIIKKKKKKKKK    KKKKKKKHHHHHHHHH     HHHHHHHHH" << std::endl;
 		std::cout << "Here's Menu" << std::endl;
+		
 		int size = menu.size();
-		for (int i = 1;i <= size;i++)std::cout << "Enter [" << i << "] to <" << menu[i - 1] << ">" << std::endl;
+		for (int i = 1;i <= size;i++)
+			std::cout << "Enter [" << i << "] to <" << menu[i - 1] << ">" << std::endl;
 	}
-	//Add instruction to menu (Order matters)
+	// add instruction to menu (Order matters)
 	void selectMenu()
 	{
-
 		int selectedNum;std::cin >> selectedNum;
+		// clear screen
 		system("CLS");
+		// print message
 		std::cout << "You've selected [" << selectedNum << "] ";
 		switch (selectedNum)
 		{
@@ -91,6 +95,7 @@ public:
 			}
 		}
 	}
+	// search recipe by name
 	void searchRecipe()
 	{
 		std::cout << "Search : " << std::flush;
@@ -106,6 +111,8 @@ public:
 			e.resolve();
 		}
 	}
+
+	// add recipe to recipeDB
 	void addRecipe()
 	{
 		std::cout << "You will enter recipe information in [[ NAME -> DESCRIPTION -> TIME -> INGREDIENTS ]] order" << std::endl;
@@ -132,6 +139,8 @@ public:
 			e.resolve();
 		}
 	}
+
+	// add plan to planDB
 	void addPlan()
 	{
 		std::cout << "You will enter plan information in [[ YEAR -> MONTH -> DAY -> DAYNAME -> BREAKFAST -> LUNCH -> DINNER ]] order" << std::endl;
@@ -144,6 +153,8 @@ public:
 		Meal dinner = addMeal("Dinner   ");
 		planDB._insert(Date(year, month, day), Plan(dayName.c_str(), Date(year, month, day), { breakfast,lunch,dinner }));
 	}
+
+	// add Meal and returns Meal instance
 	Meal addMeal(std::string mealName)
 	{
 		std::cout << mealName << " (If you want to stop enter \"stop\" ) : " << std::flush;
@@ -152,7 +163,8 @@ public:
 		while (true)
 		{
 			std::string recipe;std::getline(std::cin, recipe);
-			if (recipe == "stop")break;
+			if (recipe == "stop")
+				break;
 			recipeList.push_back(recipe);
 		}
 		return Meal(recipeList);
