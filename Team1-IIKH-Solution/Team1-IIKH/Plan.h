@@ -53,6 +53,7 @@ public:
 
 	// print all recipes
 	void print() {
+		std::cout << std::endl;
 		for (std::string recipe : recipeNames) {
 			std::cout <<" - "<< recipe << std::endl;
 		}
@@ -146,11 +147,11 @@ public:
 
 	// prints all meal plan
 	void print() {
-		std::cout << "Plan Name : " << name << std::endl;
-		std::cout << "Date : " << date.getDateString() << std::endl;
-		std::cout << "Breakfast : "; Breakfast.print(); std::cout << std::endl;
-		std::cout << "Lunch : "; Lunch.print(); std::cout << std::endl;
-		std::cout << "Dinner : "; Dinner.print(); std::cout << std::endl << std::endl;
+		std::cout << " Meal plan for <" << date.getDateString() << "> **" << std::endl;
+		std::cout << " Plan Name	: " << name<<endl;
+		std::cout << " >> Breakfast"; Breakfast.print(); std::cout << std::endl;
+		std::cout << " >> Lunch"; Lunch.print(); std::cout << std::endl;
+		std::cout << " >> Dinner"; Dinner.print(); std::cout << std::endl << std::endl;
 	}
 };
 

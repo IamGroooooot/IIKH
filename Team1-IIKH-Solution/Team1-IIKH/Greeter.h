@@ -138,7 +138,7 @@ public:
 		std::cout << "Year        : " << std::flush;	std::cin.clear();	std::cin.ignore();	int year;					std::cin >> year;
 		std::cout << "Month       : " << std::flush;	std::cin.clear();						int month;					std::cin >> month;
 		std::cout << "Day         : " << std::flush;	std::cin.clear();						int day;					std::cin >> day;
-		std::cout << "Dayname	    : " << std::flush;	std::cin.clear();	std::cin.ignore();	std::string dayName;		std::getline(std::cin, dayName);
+		std::cout << "Plan Name	: " << std::flush;	std::cin.clear();	std::cin.ignore();	std::string dayName;		std::getline(std::cin, dayName);
 		Meal breakfast = addMeal("Breakfast");
 		Meal lunch = addMeal("Lunch    ");
 		Meal dinner = addMeal("Dinner   ");
