@@ -105,7 +105,7 @@ void selectMenu(std::vector<std::string> &menu, PlanDB &planDB, RecipeDB &recipe
             {
                 std::cout<<"to QUIT..."<<std::endl;
 
-				//planDB._save();
+				planDB._save();
 				recipeDB._save();
 
                 exit(0);
