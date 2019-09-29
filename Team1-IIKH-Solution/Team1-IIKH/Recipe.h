@@ -181,8 +181,10 @@ public:
 			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
 			bool isFirst = true;
 			for (auto myKey : keys) {
-				if (isFirst)
+				if (isFirst) {
 					continue;
+					isFirst = false;
+				}
 				item->insert(make_pair(myKey, std::string("")));
 			}
 			item->insert(make_pair(keys[0], std::to_string(id)));
