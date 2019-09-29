@@ -19,7 +19,8 @@ private:
 	std::set<std::string> ingredients;
 	// Recipe's Expected Time it takes to cook. 
 	int time;
-
+	// ingredientString for saving(Buffer)
+	std::string ingredientString;
 public:
 	// CTOR: name, description, time, ingredients will be initialized
 	Recipe(std::string && n, std::string && d, int t, std::vector<std::string> i) :
@@ -55,6 +56,20 @@ public:
 	// find if there is ingredient
 	bool searchIngredient(std::string & n) { return ingredients.find(n) != ingredients.end(); }
 
+	std::string getIngredientsIntoString() {
+		//int maxCnt = 0;
+		for (auto ingredient : ingredients) {
+			ingredientString.append(ingredient);
+			ingredientString.append("$");
+
+			//maxCnt++;
+			//if (maxCnt == 4) {
+			//	break;
+			//}
+		}
+
+		return ingredientString;
+	}
 	// print Recipe data
 	void print() {
 		std::cout << "Recipe Name : " << name << std::endl;
