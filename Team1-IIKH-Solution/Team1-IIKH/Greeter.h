@@ -45,50 +45,50 @@ public:
 		std::cout << "You've selected [" << selectedNum << "] ";
 		switch (selectedNum)
 		{
-		case 1:
-		{
-			std::cout << "to search recipe" << std::endl;
-			searchRecipe();
-			break;
-		}
-		case 2:
-		{
-			std::cout << "to add recipe" << std::endl;
-			addRecipe();
-			break;
-		}
-		case 3:
-		{
-			std::cout << "to view recipe" << std::endl;
-			recipeDB._showAll();
+			case 1:
+			{
+				std::cout << "to search recipe" << std::endl;
+				searchRecipe();
+				break;
+			}
+			case 2:
+			{
+				std::cout << "to add recipe" << std::endl;
+				addRecipe();
+				break;
+			}
+			case 3:
+			{
+				std::cout << "to view recipe" << std::endl;
+				recipeDB._showAll();
 
-			break;
-		}
-		case 4:
-		{
-			std::cout << "to add plan" << std::endl;
-			addPlan();
-			break;
-		}
-		case 5:
-		{
-			std::cout << "to view plan" << std::endl;
-			planDB._showAll();
-			break;
-		}
-		case 6:
-		{
-			std::cout << "to QUIT..." << std::endl;
-			planDB._save();
-			recipeDB._save();
-			exit(0);
-			break;
-		}
-		default:
-		{
-			std::cout << "PLEASE ENTER NUMBER FROM 1 ~ " << menu.size() << std::endl;
-			break;
-		}
+				break;
+			}
+			case 4:
+			{
+				std::cout << "to add plan" << std::endl;
+				addPlan();
+				break;
+			}
+			case 5:
+			{
+				std::cout << "to view plan" << std::endl;
+				planDB._showAll();
+				break;
+			}
+			case 6:
+			{
+				std::cout << "to QUIT..." << std::endl;
+				planDB._save();
+				recipeDB._save();
+				exit(0);
+				break;
+			}
+			default:
+			{
+				std::cout << "PLEASE ENTER NUMBER FROM 1 ~ " << menu.size() << std::endl;
+				break;
+			}
 		}
 	}
 	void searchRecipe()

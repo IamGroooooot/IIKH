@@ -57,15 +57,9 @@ public:
 	bool searchIngredient(std::string & n) { return ingredients.find(n) != ingredients.end(); }
 
 	std::string getIngredientsIntoString() {
-		//int maxCnt = 0;
 		for (auto ingredient : ingredients) {
 			ingredientString.append(ingredient);
 			ingredientString.append("$");
-
-			//maxCnt++;
-			//if (maxCnt == 4) {
-			//	break;
-			//}
 		}
 
 		return ingredientString;
@@ -73,12 +67,28 @@ public:
 	// print Recipe data
 	void print() {
 		std::cout << "Recipe Name : " << name << std::endl;
-		std::cout << "Ingredients : ";
-		for (std::string s : ingredients)
-			std::cout << s << ' ';
-		std::cout << std::endl;
+		std::cout << "Ingredients : "<< endl;
+		for (std::string s : ingredients) {
+			std::cout << " - " << s << std::endl;
+		}
 		std::cout << "Expected Time : " << time << std::endl;
-		std::cout << "Direction : " << description << std::endl << std::endl;
+		std::cout << "Direction : " << std::endl;
+		
+		for (auto pLines : CSVParser::instance().split(description, '$', -1)) {
+			std::cout << " - ";
+			int i = 0;
+			for (auto pCommas : CSVParser::instance().split(pLines, '/', -1)) {
+				if (i == 0) {
+					std::cout << pCommas;
+					continue;
+				}
+				std::cout << "," << pCommas;
+				i++;
+			}
+			std::cout << std::endl;
+		}
+
+	std:cout << "================================================================================" << std::endl;
 	}
 };
 
@@ -134,7 +144,7 @@ public:
 	// used for saving Recipe Data
 	std::vector<std::map<std::string, std::string>*> _setRecipeDBData() {
 		// variable
-		std::vector<std::map<std::string, std::string>*> *saveData = new std::vector<std::map<std::string, std::string>*>();
+		std::vector<std::map<std::string, std::string>*> *savedData = new std::vector<std::map<std::string, std::string>*>();
 		int id = 0;
 		int index = 0;
 
@@ -161,11 +171,25 @@ public:
 			item->insert(make_pair(keys[4], targetRecipe.getIngredientsIntoString()));
 
 			// push to vector
-			saveData->push_back(item);
+			savedData->push_back(item);
 			// inc id
 			id++;
 		}
 
-		return *saveData;
+		// In case of Empty case (write함수에서 key를 설정하는 방식으로 인해 빈 맵이 있어야함)
+		if (savedData->size() == 0) {
+			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
+			bool isFirst = true;
+			for (auto myKey : keys) {
+				if (isFirst)
+					continue;
+				item->insert(make_pair(myKey, std::string("")));
+			}
+			item->insert(make_pair(keys[0], std::to_string(id)));
+			// push to vector
+			savedData->push_back(item);
+		}
+
+		return *savedData;
 	}
 };

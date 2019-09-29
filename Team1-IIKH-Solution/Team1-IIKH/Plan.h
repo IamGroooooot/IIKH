@@ -53,9 +53,10 @@ public:
 
 	// print all recipes
 	void print() {
-		for (std::string recipe : recipeNames)
-			std::cout << recipe << ' ';
-		//std::cout<<std::endl;
+		for (std::string recipe : recipeNames) {
+			std::cout <<" - "<< recipe << std::endl;
+		}
+		std::cout<<std::endl;
 	}
 };
 
@@ -213,9 +214,8 @@ public:
 	// used for saving Plan Data
 	std::vector<std::map<std::string, std::string>*> _setPlanDBData() {
 		// variable
-		std::vector<std::map<std::string, std::string>*> *saveData = new std::vector<std::map<std::string, std::string>*>();
+		std::vector<std::map<std::string, std::string>*> *savedData = new std::vector<std::map<std::string, std::string>*>();
 		int id = 0;
-		int index = 0;
 
 		// hard code keys 
 		std::vector<std::string> keys;
@@ -241,13 +241,26 @@ public:
 			item->insert(make_pair(keys[4], targetPlan.getLunch().getRecipeNamesIntoString()));
 			item->insert(make_pair(keys[5], targetPlan.getDinner().getRecipeNamesIntoString()));
 
-
 			// push to vector
-			saveData->push_back(item);
+			savedData->push_back(item);
 			// inc id
 			id++;
 		}
 
-		return *saveData;
+		// In case of Empty case (write함수에서 key를 설정하는 방식으로 인해 빈 맵이 있어야함)
+		if (savedData->size() == 0) {
+			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
+			bool isFirst = true;
+			for (auto myKey : keys) {
+				if (isFirst)
+					continue;
+				item->insert(make_pair(myKey, std::string("")));
+			}
+			item->insert(make_pair(keys[0], std::to_string(id)));
+			// push to vector
+			savedData->push_back(item);
+		}
+
+		return *savedData;
 	}
 };

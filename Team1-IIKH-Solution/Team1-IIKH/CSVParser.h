@@ -72,7 +72,7 @@ std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string fil
 	}
 	else
 	{
-		std::cout << "Failed to open file. Check if " << filename << "exists" << std::endl;
+		std::cout << "Failed to open file. Check if " << filename << " file exists" << std::endl;
 	}
 
 	return *parsedData;
@@ -84,17 +84,17 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 	map<string, string> m_dataPiece = *data[0];
 	vector<string> v_keys;
 
+	// set Keys
 	for (map<string, string>::iterator it = m_dataPiece.begin(); it != m_dataPiece.end(); ++it)
 	{
 		v_keys.push_back(it->first);
 	}
 
-	//convert data to string
-	string buffer(convertToString(v_keys, delimiter));		//push converted key string to buffer 
+	//push converted key string to buffer 
+	string buffer(convertToString(v_keys, delimiter));		
 
 	for (auto item : data)
 	{
-
 		m_dataPiece = *item;
 		buffer.append(convertToString(m_dataPiece));
 	}
