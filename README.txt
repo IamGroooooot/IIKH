@@ -16,7 +16,7 @@
  * the Input files are already in excutable file directory.
  * you can also delete all input file and execute. Then, if you view all recipe or plan, it is empty.
 
-3. Read below [Important] tag descrtion and Enjoy :)
+3. Read below [Important] tag description and Enjoy :)
 
 
 [Important]
