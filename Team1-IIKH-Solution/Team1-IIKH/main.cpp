@@ -15,18 +15,19 @@ int main() {
 
 	PlanDB planDB;
 	RecipeDB recipeDB;
-    std::vector<std::string> menu;
-	Greeter greeter(menu,recipeDB,planDB);
+	std::vector<std::string> menu;
+	Greeter greeter(menu, recipeDB, planDB);
 
 
-    while(true)
-    {
+	while (true)
+	{
 		system("CLS");
-        greeter.printMenu();
-        greeter.selectMenu();
-		
-		cout << "Press anykey to continue" << endl;
-		cin.ignore();
+		greeter.printMenu();
+		greeter.selectMenu();
+
+		std::cout << "Press anykey to continue" << endl;
+		std::cout << "" << std::flush;
 		getchar();
-    }
+		getchar();
+	}
 }

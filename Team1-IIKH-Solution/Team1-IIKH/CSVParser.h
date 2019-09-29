@@ -96,7 +96,6 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 	{
 
 		m_dataPiece = *item;
-		std::cout << convertToString(m_dataPiece) << std::endl;
 		buffer.append(convertToString(m_dataPiece));
 	}
 
@@ -149,20 +148,3 @@ string CSVParser::convertToString(vector<string> data, char delimiter)
 	buffer.append("\n");
 	return buffer;
 }
-
-// ���� ����
-/*
-void main()
-{
-	CSVParser parser;
-	std::vector<std::map<std::string, std::string>*> parsedData = parser.Read("IIKHRecipe.csv");
-
-	for (int i = 0; i < parsedData.size(); i++)
-	{
-		std::map<std::string, std::string>* temp = parsedData[i];
-		for (auto it = temp->cbegin(); it != temp->cend(); ++it)
-		{
-			std::cout << it->second << "\n";
-		}
-	}
-}*/

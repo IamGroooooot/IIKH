@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="CSVParser.h" />
     <ClInclude Include="Database.h" />
+    <ClInclude Include="Greeter.h" />
     <ClInclude Include="Plan.h" />
     <ClInclude Include="Recipe.h" />
   </ItemGroup>
