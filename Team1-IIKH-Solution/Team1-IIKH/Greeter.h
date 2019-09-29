@@ -59,6 +59,7 @@ public:
 			{
 				std::cout << "to add recipe" << std::endl;
 				addRecipe();
+				recipeDB._save();
 				break;
 			}
 			case 3:
@@ -72,6 +73,7 @@ public:
 			{
 				std::cout << "to add plan" << std::endl;
 				addPlan();
+				planDB._save();
 				break;
 			}
 			case 5:
