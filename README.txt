@@ -2,11 +2,11 @@
 ### You can run it in Windows.
 
 [If you are using VisualStudio 2019]
-1. Open IIKH/Team1-IIKH-Solution/Team1-IIKH-Solution.sln solotion file.
+1. Open IIKH/Team1-IIKH-Solution/Team1-IIKH-Solution.sln solution file.
 
 2. Start with no debuging(디버그하지 않고 시작) [Ctrl-F5]
 
-3. Read below [Important] tag descrtion and Enjoy :)
+3. Read below [Important] tag description and Enjoy :)
 
 
 [If you are not using VisualStudio 2019 or wanting to excute it in terminal]
