@@ -182,12 +182,12 @@ public:
 			bool isFirst = true;
 			for (auto myKey : keys) {
 				if (isFirst) {
-					continue;
+					item->insert(make_pair(keys[0], std::string("0")));
 					isFirst = false;
+					continue;
 				}
-				item->insert(make_pair(myKey, std::string("")));
+				item->insert(make_pair(myKey, std::string("EmptyData")));
 			}
-			item->insert(make_pair(keys[0], std::to_string(id)));
 			// push to vector
 			savedData->push_back(item);
 		}

@@ -80,7 +80,7 @@ std::vector<std::map<std::string, std::string>*> CSVParser::read(std::string fil
 
 // write file
 void CSVParser::write(std::string filename, std::vector<std::map<std::string, std::string>*> data) {
-	//get keys and convert to string
+	// get keys and convert to string
 	map<string, string> m_dataPiece = *data[0];
 	vector<string> v_keys;
 
@@ -90,12 +90,15 @@ void CSVParser::write(std::string filename, std::vector<std::map<std::string, st
 		v_keys.push_back(it->first);
 	}
 
-	//push converted key string to buffer 
+	// push converted key string to buffer 
 	string buffer(convertToString(v_keys, delimiter));		
 
 	for (auto item : data)
 	{
 		m_dataPiece = *item;
+		// write 함수용 fakeData인 경우 skip
+		if (m_dataPiece.begin()->second.compare("EmptyData") == 0)
+			break;
 		buffer.append(convertToString(m_dataPiece));
 	}
 
