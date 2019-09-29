@@ -161,6 +161,11 @@ public:
 				index++;
 			}
 
+			for (int index = index; index < 9; index++)
+			{
+				item->insert(make_pair(keys[index], std::string("")));
+			}
+
 			// push to vector
 			saveData->push_back(item);
 			// inc id

@@ -62,6 +62,7 @@ void printMenu(std::vector<std::string> &menu)
     int size = menu.size();
     for(int i = 1;i<=size;i++)std::cout<<"Enter ["<<i<<"] to <"<<menu[i-1]<<">"<<std::endl;
 }
+
 void selectMenu(std::vector<std::string> &menu, PlanDB &planDB, RecipeDB &recipeDB)
 {
         int selectedNum;std::cin>>selectedNum;
