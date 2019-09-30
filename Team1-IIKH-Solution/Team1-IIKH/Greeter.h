@@ -25,8 +25,8 @@ public:
 		addMenu("SEARCH PLAN");//5
 		addMenu("ADD PLAN");//6
 		addMenu("DELETE PLAN");//7
-		addMenu("VIEW PLAN");//7
-		addMenu("QUIT");//8
+		addMenu("VIEW PLAN");//8
+		addMenu("QUIT");//9
 	};
 
 	void addMenu(std::string instruction) {
@@ -36,11 +36,13 @@ public:
 	void printMenu() {
 		// print logo and menu
 		std::cout << "IIIIIIIIIIIIIIIIIIIIKKKKKKKKK    KKKKKKKHHHHHHHHH     HHHHHHHHH\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nII::::::IIII::::::IIK:::::::K   K::::::KHH::::::H     H::::::HH\n  I::::I    I::::I  KK::::::K  K:::::KKK  H:::::H     H:::::H  \n  I::::I    I::::I    K:::::K K:::::K     H:::::H     H:::::H  \n  I::::I    I::::I    K::::::K:::::K      H::::::HHHHH::::::H  \n  I::::I    I::::I    K:::::::::::K       H:::::::::::::::::H  \n  I::::I    I::::I    K:::::::::::K       H:::::::::::::::::H  \n  I::::I    I::::I    K::::::K:::::K      H::::::HHHHH::::::H  \n  I::::I    I::::I    K:::::K K:::::K     H:::::H     H:::::H  \n  I::::I    I::::I  KK::::::K  K:::::KKK  H:::::H     H:::::H  \nII::::::IIII::::::IIK:::::::K   K::::::KHH::::::H     H::::::HH\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nI::::::::II::::::::IK:::::::K    K:::::KH:::::::H     H:::::::H\nIIIIIIIIIIIIIIIIIIIIKKKKKKKKK    KKKKKKKHHHHHHHHH     HHHHHHHHH" << std::endl;
-		std::cout << "Here's Menu" << std::endl;
+		std::cout << std::endl;
+		std::cout << " ********** Here's Menu ********** " << std::endl;
+		std::cout << std::endl;
 
 		int size = menu.size();
 		for (int i = 1; i <= size; i++)
-			std::cout << "Enter [" << i << "] to <" << menu[i - 1] << ">" << std::endl;
+			std::cout << "  >> Enter [" << i << "] to <" << menu[i - 1] << ">" << std::endl;
 	}
 	// add instruction to menu (Order matters)
 	void selectMenu()
