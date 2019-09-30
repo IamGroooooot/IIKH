@@ -125,11 +125,11 @@ public:
 
 	// prints all meal plan
 	void print() {
-		std::cout << " Plan Name	: " << name<<std::endl<<" ************************************"<<std::endl;
+		std::cout << " Plan Name	: " << name<<std::endl;
 		std::cout << " >> Breakfast"; Breakfast.print(); std::cout ;
 		std::cout << " >> Lunch"; Lunch.print(); std::cout;
 		std::cout << " >> Dinner"; Dinner.print(); std::cout;
-		std::cout << "-----------------------------------------------" << std::endl;
+		std::cout << "----------------------------------------------------" << std::endl;
 	}
 };
 
@@ -157,5 +157,4 @@ public:
 	}
 	// save into local
 	void _save();
-
 };

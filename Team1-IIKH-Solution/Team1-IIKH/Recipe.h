@@ -62,7 +62,7 @@ public:
 			std::cout << "  - " << s << std::endl;
 		std::cout << " >> Cooking Time(min) : " << time << std::endl;
 		std::cout << " >> Direction(How To Cook)"<< std::endl << "  - " << description << std::endl;
-		std::cout << "-----------------------------------------------"<<std::endl;
+		std::cout << "----------------------------------------------------"<<std::endl;
 
 	}
 };

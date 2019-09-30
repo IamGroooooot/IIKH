@@ -114,8 +114,8 @@ public:
 		}
 		else {
 			std::cout << "There is "<< recipeNames.size() <<" matching result for \"" << searchM << "\"" << std::endl;
-			std::cout << "===============================================" << std::endl;
-			std::cout << "===============================================" << std::endl << std::endl;
+			std::cout << "====================================================" << std::endl;
+			std::cout << "====================================================" << std::endl << std::endl;
 		}
 
 
