@@ -139,11 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CSVParser.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plan.cpp" />
+    <ClCompile Include="Recipe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSVParser.h" />
     <ClInclude Include="Database.h" />
+    <ClInclude Include="Exception.h" />
     <ClInclude Include="Greeter.h" />
     <ClInclude Include="Plan.h" />
     <ClInclude Include="Recipe.h" />

@@ -7,6 +7,7 @@
 #include "Recipe.h"
 #include "Plan.h"
 #include "CSVParser.h"
+#include "Exception.h"
 #include "Greeter.h"
 
 int main() {
@@ -36,6 +37,16 @@ int main() {
 		//getchar();
 		//getchar();
 	}
-
 	return 0;
+
+
+	try {
+		RecipeDB recipeDB;
+		for (auto record : recipeDB._search(std::string("RecipeN")))
+			recipeDB._show(record);
+		recipeDB._show(std::string("sfda"));
+	}
+	catch (Exception & e) {
+		e.resolve();
+	}
 }

@@ -3,6 +3,8 @@
 #include <map>
 #include <iostream>
 
+#include "Exception.h"
+
 // class declaration
 class Date;
 class DBException;
@@ -27,8 +29,6 @@ protected:
 	std::map<_key, _value> db;
 
 public:
-	// static std::string recipeKeys[] = { "index" ,"name","description","time","ingredient0","ingredient1","ingredient2","ingredient3","ingredient4" };
-
 	// insert pair of key and value
 	void _insert(_key k, _value v) { db.insert(std::pair<_key, _value>(k, v)); }
 
@@ -64,16 +64,11 @@ public:
 };
 
 // performs handles DB related error
-class DBException {
-private:
-	int error;
-	std::string option;
-
+class DBException : public Exception{
 public:
 	// CTOR: initializes error and option
 	DBException(int e, const char * s) :
-		error(e), option(s) {};
-
+		Exception(e, s) {};
 	// resolve DB Error
 	void resolve() {
 		// print error type

@@ -2,25 +2,17 @@
 #include <set>
 #include <string>
 #include <iostream>
-#include <string.h>
 
 #include "Database.h"
 #include "Recipe.h"
-#include "CSVParser.h"
 
 // stores a lot of RecipeNames
 class Meal {
 private:
 	// set, sorts recipes in alphabetical order
 	std::set<std::string> recipeNames;
-	std::string recipeString;
 
 public:
-	// Empty CTOR
-	Meal() {
-		
-	}
-
 	// CTOR: saves Recipe vector[argument] into RecipeNames set[class member]
 	Meal(std::vector<std::string> r) {
 		for (std::string s : r)
@@ -36,15 +28,6 @@ public:
 	// delete target recipe from Recipes set[class member]
 	void deleteRecipes(std::string & target) { recipeNames.erase(target); }
 
-	std::string getRecipeNamesIntoString() {
-		for (auto _recipe : recipeNames) {
-			recipeString.append(_recipe);
-			recipeString.append("$");
-		}
-
-		return recipeString;
-	}
-
 	// print all recipes
 	void print() {
 		std::cout << std::endl;
@@ -53,6 +36,15 @@ public:
 		}
 		std::cout<<std::endl;
 	}
+
+	// returns plan instance to string
+	std::string toString() const {
+		std::string res = { '"' };
+		for (auto value : recipeNames)
+			res += value + ',';
+		res[res.size() - 1] = '"';
+		return res;
+	}
 };
 
 
@@ -60,24 +52,13 @@ class Date {
 private:
 	// variables for Date
 	int year, month, day;
-	// save date in format("%04d%02d%02d")
-	std::string dateString;
 
 public:
 	// CTOR
-	Date(char temp[9])
-	{
-		sscanf_s(temp, "%04d%02d%02d", &year, &month, &day);
-		sprintf_s(temp, 9, "%04d%02d%02d", year, month, day);
-		dateString.append(temp);
-	};
-	// CTOR
 	Date(int y, int m, int d) :
-		year(y), month(m), day(d) {
-		char temp[9];
-		sprintf_s(temp, 9, "%04d%02d%02d", year, month, day);
-		dateString.append(temp);
-	};
+		year(y), month(m), day(d) {	};
+	
+	Date(const char * d) { sscanf_s(d, "%04d%02d%02d", &year, &month, &day); };
 
 	// date ordering standard
 	friend bool operator<(const Date & first, const Date & second) {
@@ -89,12 +70,17 @@ public:
 		return false;
 	}
 
-	std::string getDateString() {
-		return dateString;
+	// returns Date instance to string
+	std::string toString() const {
+		char buf[9];
+		sprintf_s(buf, "%04d%02d%02d", year, month, day);
+		return std::string(buf);
 	}
 
 	// return dateString into .c format string
-	const char * c_str() { return dateString.c_str(); }
+	const char * c_str() const {
+		return toString().c_str();
+	}
 };
 
 // stores Meals(Breakfast, Lunch, Dinner) which is daily meal plan
@@ -102,36 +88,28 @@ class Plan {
 private:
 	// Plan name
 	std::string name;
-	// Date
-	Date date;
 
 	// Plan has three meal instance
 	Meal Breakfast, Lunch, Dinner;
 
 public:
 	// CTOR name date mealVector
-	Plan(std::string && n, Date date, std::vector<Meal> m ) :
-		name(n), Breakfast(m[0]), Lunch(m[1]), Dinner(m[2]), date(date) {};
+	Plan(std::string & n, std::vector<Meal> m) :
+		name(n), Breakfast(m[0]), Lunch(m[1]), Dinner(m[2]) {};
 	
 	/* GET */
 	// get Plan name
 	const std::string & getName() const { return name; }
-	// get Plan date
-	Date getDate() const { return date; }
 	// get Breakfast Meal
-	Meal getBreakfast() const { return Breakfast; }
+	const Meal & getBreakfast() { return Breakfast; }
 	// get Lunch Meal
-	Meal getLunch() const { return Lunch; }
+	const Meal & getLunch() { return Lunch; }
 	// get Dinner Meal
-	Meal getDinner() const { return Dinner; }
+	const Meal & getDinner() { return Dinner; }
 
 	/* SET */
 	// set Plan name
 	void setName(std::string & _name) { name = _name; }
-	// set Plan date
-	void setDate(char dateString[9]) {
-		date = *(new Date(dateString));
-	}
 	// set Breakfast Meal
 	void setBreakfast(Meal & b) { Breakfast = b; }
 	// set Lunch Meal
@@ -141,8 +119,7 @@ public:
 
 	// prints all meal plan
 	void print() {
-		std::cout << " ***** Meal plan for <" << date.getDateString() << "> *****" << std::endl;
-		std::cout << " Plan Name	: " << name<<endl<<" ************************************"<<endl;
+		std::cout << " Plan Name	: " << name<<std::endl<<" ************************************"<<std::endl;
 		std::cout << " >> Breakfast"; Breakfast.print(); std::cout << std::endl;
 		std::cout << " >> Lunch"; Lunch.print(); std::cout << std::endl;
 		std::cout << " >> Dinner"; Dinner.print(); std::cout << std::endl << std::endl;
@@ -156,36 +133,9 @@ private:
 	  
 public:
 	// CTOR
-	PlanDB() {
-		// Load File
-		std::vector<std::map<std::string, std::string>*> parsedData = CSVParser::instance().read("IIKHPlanDB.csv");
-
-		for (auto myMap : parsedData) {
-			// Construct Date from csv
-			Date* datePtr = new Date(strdup(( myMap->find("date")->second.c_str())));
-
-			// Construct Plan from csv
-			Plan* planPtr = new Plan( 
-				// plan name
-				std::string(myMap->find("name")->second),
-				*datePtr, 
-				{
-					//아침
-					Meal( CSVParser::instance().split(  myMap->find("breakfast")->second  , '$', -1  ) ),
-					//점심
-					Meal( CSVParser::instance().split(  myMap->find("lunch")->second  , '$', -1  ) ),
-					//저녁
-					Meal( CSVParser::instance().split(  myMap->find("dinner")->second  , '$', -1) )
-				}
-			);
-
-			// insert to DB
-			this->_insert(*datePtr,*planPtr);
-		}
-		//std::cout << "[디버그] Plan DB 생성 완료" << std::endl;
-	}
+	PlanDB();
 	// DTOR
-	~PlanDB() {};
+	~PlanDB() { _save(); };
 
 	// select item by given date and print 
 	void _show(Date key) {
@@ -199,62 +149,6 @@ public:
 		}
 	}
 	// save into local
-	void _save() {
-		CSVParser::instance().write("IIKHPlanDB.csv", _setPlanDBData());
-	};
+	void _save();
 
-	// used for saving Plan Data
-	std::vector<std::map<std::string, std::string>*> _setPlanDBData() {
-		// variable
-		std::vector<std::map<std::string, std::string>*> *savedData = new std::vector<std::map<std::string, std::string>*>();
-		int id = 0;
-
-		// hard code keys 
-		std::vector<std::string> keys;
-		keys.push_back(std::string("index")); //0
-		keys.push_back(std::string("name")); //1
-		keys.push_back(std::string("date")); //2
-		keys.push_back(std::string("breakfast")); //3
-		keys.push_back(std::string("lunch")); //4
-		keys.push_back(std::string("dinner")); //5
-
-		for (std::pair<Date, Plan> dbItemPair : db)
-		{
-			// get dbItem
-			Plan targetPlan = dbItemPair.second;
-
-			// one item
-			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
-
-			item->insert(make_pair(keys[0], std::to_string(id)));
-			item->insert(make_pair(keys[1], targetPlan.getName()));
-			item->insert(make_pair(keys[2], targetPlan.getDate().getDateString()));
-			item->insert(make_pair(keys[3], targetPlan.getBreakfast().getRecipeNamesIntoString()));
-			item->insert(make_pair(keys[4], targetPlan.getLunch().getRecipeNamesIntoString()));
-			item->insert(make_pair(keys[5], targetPlan.getDinner().getRecipeNamesIntoString()));
-
-			// push to vector
-			savedData->push_back(item);
-			// inc id
-			id++;
-		}
-
-		// In case of Empty case (write함수에서 key를 설정하는 방식으로 인해 빈 맵이 있어야함)
-		if (savedData->size() == 0) {
-			std::map<std::string, std::string>* item = new std::map<std::string, std::string>();
-			bool isFirst = true;
-			for (auto myKey : keys) {
-				if (isFirst) {
-					item->insert(make_pair(keys[0], std::string("0")));
-					isFirst = false;
-					continue;
-				}
-				item->insert(make_pair(myKey, std::string("EmptyData")));
-			}
-			// push to vector
-			savedData->push_back(item);
-		}
-
-		return *savedData;
-	}
 };

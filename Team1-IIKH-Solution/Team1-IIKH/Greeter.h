@@ -132,12 +132,13 @@ public:
 			ingredients.push_back(ingredient);
 		}
 
+		
 		try
 		{
-			Recipe* recipe = new Recipe(std::string(name.c_str()), std::string(description.c_str()), time, ingredients);
+			Recipe* recipe = new Recipe(name, description, time, ingredients);
 			recipeDB._insert(name, *recipe);
 		}
-		catch (DBException e) {
+		catch (DBException & e) {
 			e.resolve();
 		}
 	}
@@ -153,7 +154,7 @@ public:
 		Meal breakfast = addMeal("Breakfast");
 		Meal lunch = addMeal("Lunch    ");
 		Meal dinner = addMeal("Dinner   ");
-		planDB._insert(Date(year, month, day), Plan(dayName.c_str(), Date(year, month, day), { breakfast,lunch,dinner }));
+		planDB._insert(Date(year, month, day), Plan(dayName, { breakfast,lunch,dinner }));
 	}
 
 	// add Meal and returns Meal instance
