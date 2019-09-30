@@ -20,6 +20,7 @@ public:
 		menu(_menu), recipeDB(_recipeDB), planDB(_planDB) {
 		addMenu("SEARCH RECIPE");//1
 		addMenu("ADD RECIPE");//2
+		addMenu("DELETE RECIPE");//3
 		addMenu("VIEW RECIPE");//3
 		addMenu("SEARCH PLAN");//4
 		addMenu("ADD PLAN");//5
@@ -65,31 +66,37 @@ public:
 			}
 			case 3:
 			{
-				std::cout << "to view recipe" << std::endl;
-				recipeDB._showAll();
-
+				std::cout << "to delete recipe" << std::endl;
+				deleteRecipe();
+				recipeDB._save();
 				break;
 			}
 			case 4:
+			{
+				std::cout << "to view recipe" << std::endl;
+				recipeDB._showAll();
+				break;
+			}
+			case 5:
 			{
 				std::cout << "to search plan" << std::endl;
 				searchPlan();
 				break;
 			}
-			case 5:
+			case 6:
 			{
 				std::cout << "to add plan" << std::endl;
 				addPlan();
 				planDB._save();
 				break;
 			}
-			case 6:
+			case 7:
 			{
 				std::cout << "to view plan" << std::endl;
 				planDB._showAll();
 				break;
 			}
-			case 7:
+			case 8:
 			{
 				std::cout << "to QUIT..." << std::endl;
 				planDB._save();
@@ -118,13 +125,12 @@ public:
 		if (recipeNames.size() == 0) {
 			std::cout << "There is no search result for Recipe(" << searchM << ")" << std::endl;
 			return;
-		}
+		}// has search results
 		else {
 			std::cout << "There is " << recipeNames.size() << " matching result for \"" << searchM << "\"" << std::endl;
 			std::cout << "====================================================" << std::endl;
 			std::cout << "====================================================" << std::endl << std::endl;
 		}
-
 
 		for (auto recipeName : recipeNames)
 		{
@@ -138,8 +144,6 @@ public:
 				e.resolve();
 			}
 		}
-
-
 	}
 
 	// add recipe to recipeDB
@@ -245,6 +249,34 @@ public:
 		catch (DBException & e)
 		{
 			e.resolve();
+		}
+	}
+
+	void deleteRecipe() {
+		std::cout << "Enter recipe name which you want to delete : " << std::flush;
+		std::cin.ignore();
+		std::string searchM;
+		std::getline(std::cin, searchM);
+
+		// search 
+		auto recipeNames = recipeDB._search(std::string(searchM));
+
+		// no search results
+		if (recipeNames.size() == 0) {
+			std::cout << " >> Deletion Failed." << std::endl;
+			std::cout << " >> There is no search result for Recipe(" << searchM << ")" << std::endl;
+			return;
+		}// has search results
+		else {
+			// has Entered correct
+			if (searchM.compare(recipeNames[0]) == 0) {
+				recipeDB._delete(searchM);
+				std::cout << " >> Deletion Success." << std::endl;
+			}
+			else {
+				std::cout << " >> Deletion Failed." << std::endl;
+				std::cout << " >> There is no matching recipe for \""<<searchM<<"\""<<std::endl<<" >> Did you meant \"" << recipeNames[0] << "\"? try it again" << std::endl;
+			}
 		}
 	}
 };
