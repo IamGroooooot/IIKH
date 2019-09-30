@@ -102,16 +102,37 @@ public:
 	{
 		std::cout << "Search : " << std::flush;
 		std::cin.ignore();
-		std::string searchM;std::getline(std::cin, searchM);
-		try
-		{
-			Recipe recipe = recipeDB._select(searchM);
-			recipe.print();
+		std::string searchM;
+		std::getline(std::cin, searchM);
+		
+		// get all recipes names that has searched string
+		auto recipeNames = recipeDB._search(std::string(searchM));
+		// no search results
+		if (recipeNames.size() == 0) {
+			std::cout << "There is no search result for Recipe(" << searchM << ")" << std::endl;
+			return;
 		}
-		catch (DBException e)
-		{
-			e.resolve();
+		else {
+			std::cout << "There is "<< recipeNames.size() <<" matching result for \"" << searchM << "\"" << std::endl;
+			std::cout << "===============================================" << std::endl;
+			std::cout << "===============================================" << std::endl << std::endl;
 		}
+
+
+		for (auto recipeName : recipeNames)
+		{
+			try
+			{
+				auto recipe = recipeDB._select(recipeName);
+				recipe.print();
+			}
+			catch (DBException e)
+			{
+				e.resolve();
+			}
+		}
+
+
 	}
 
 	// add recipe to recipeDB

@@ -56,12 +56,14 @@ public:
 
 	// print Recipe data
 	void print() {
-		std::cout << "Recipe Name : " << name << std::endl;
-		std::cout << "Ingredients : " << std::endl;
+		std::cout << " >> Recipe Name : " << name << std::endl;
+		std::cout << " >> Ingredients : " << std::endl;
 		for (std::string s : ingredients)
-			std::cout << " - " << s << std::endl;
-		std::cout << "Cooking Time(min) : " << time << std::endl;
-		std::cout << "Direction : " << description << std::endl << std::endl;
+			std::cout << "  - " << s << std::endl;
+		std::cout << " >> Cooking Time(min) : " << time << std::endl;
+		std::cout << " >> Direction(How To Cook)"<< std::endl << "  - " << description << std::endl;
+		std::cout << "-----------------------------------------------"<<std::endl;
+
 	}
 };
 
