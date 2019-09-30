@@ -83,7 +83,7 @@ public:
 
 			// no searching key in PlanDB
 			case 1:
-				std::cout << "There is no search result for Plan(" << option << ")"   << std::endl;
+				std::cout << "There is no search result for searched Plan" << std::endl;
 				break;
 			
 			//  unknown error
