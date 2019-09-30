@@ -21,11 +21,12 @@ public:
 		addMenu("SEARCH RECIPE");//1
 		addMenu("ADD RECIPE");//2
 		addMenu("DELETE RECIPE");//3
-		addMenu("VIEW RECIPE");//3
-		addMenu("SEARCH PLAN");//4
-		addMenu("ADD PLAN");//5
-		addMenu("VIEW PLAN");//6
-		addMenu("QUIT");//7
+		addMenu("VIEW RECIPE");//4
+		addMenu("SEARCH PLAN");//5
+		addMenu("ADD PLAN");//6
+		addMenu("DELETE PLAN");//7
+		addMenu("VIEW PLAN");//7
+		addMenu("QUIT");//8
 	};
 
 	void addMenu(std::string instruction) {
@@ -92,11 +93,18 @@ public:
 			}
 			case 7:
 			{
+				std::cout << "to delete plan" << std::endl;
+				deletePlan();
+				planDB._save();
+				break;
+			}
+			case 8:
+			{
 				std::cout << "to view plan" << std::endl;
 				planDB._showAll();
 				break;
 			}
-			case 8:
+			case 9:
 			{
 				std::cout << "to QUIT..." << std::endl;
 				planDB._save();
@@ -222,6 +230,7 @@ public:
 		return Meal(recipeList);
 	}
 
+	// search for plan
 	void searchPlan()
 	{
 		std::cout << "Enter date [[ YEAR -> MONTH -> DAY]] order" << std::endl;
@@ -250,6 +259,44 @@ public:
 		{
 			e.resolve();
 		}
+	}
+
+	// delete plan
+	void deletePlan()
+	{
+		std::cout << "Enter date [[ YEAR -> MONTH -> DAY]] order to delete plan" << std::endl;
+		std::cout << "Year        : " << std::flush;
+		std::cin.clear();
+		std::cin.ignore();
+		int year;
+		std::cin >> year;
+
+		std::cout << "Month       : " << std::flush;
+		std::cin.clear();
+		int month;
+		std::cin >> month;
+
+		std::cout << "Day         : " << std::flush;
+		std::cin.clear();
+		int day;
+		std::cin >> day;
+
+		// select plan
+		try
+		{
+			auto targetPlan = planDB._select(Date(year, month, day));
+		}
+		catch (DBException & e)
+		{
+			std::cout << " >> Deletion Failed." << std::endl;
+			e.resolve();
+			return;
+		}
+
+		// if plan exists
+		planDB._delete(Date(year, month, day));
+		std::cout << " >> Deletion Success." << std::endl;
+
 	}
 
 	void deleteRecipe() {

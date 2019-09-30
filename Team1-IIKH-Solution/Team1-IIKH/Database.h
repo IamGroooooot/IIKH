@@ -78,12 +78,12 @@ public:
 		switch (error) {
 			// no searching key in RecipeDB
 			case 0:
-				std::cout << "There is no search result for Recipe(" << option << ")" << std::endl;
+				std::cout << " >> There is no search result for Recipe(" << option << ")" << std::endl;
 				break;
 
 			// no searching key in PlanDB
 			case 1:
-				std::cout << "There is no search result for searched Plan" << std::endl;
+				std::cout << " >> There is no matching result for searched Plan" << std::endl;
 				break;
 			
 			//  unknown error
