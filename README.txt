@@ -20,6 +20,7 @@
 
 
 [Important]
+ * Instead of file1.txt we used our own DB files.
  * DB files are created in project directory(IIKH/Team1-IIKH-Solution/Team1-IIKH/).
  * DB files are named(IIKHPlanDB.csv, IIKHRecipeDB.csv) and you can open it by Excel.
 

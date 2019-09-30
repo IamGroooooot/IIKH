@@ -133,7 +133,7 @@ public:
 		auto recipeNames = recipeDB._search(std::string(searchM));
 		// no search results
 		if (recipeNames.size() == 0) {
-			std::cout << "There is no search result for Recipe(" << searchM << ")" << std::endl;
+			std::cout << " >> There is no search result for Recipe(" << searchM << ")" << std::endl;
 			return;
 		}// has search results
 		else {
@@ -294,7 +294,7 @@ public:
 			e.resolve();
 			return;
 		}
-
+		
 		// if plan exists
 		planDB._delete(Date(year, month, day));
 		std::cout << " >> Deletion Success." << std::endl;
