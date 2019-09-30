@@ -60,13 +60,10 @@ public:
 		std::cout << "Ingredients : " << std::endl;
 		for (std::string s : ingredients)
 			std::cout << " - " << s << std::endl;
-		// new DEl
-		//CSVParser::
-		
-
 		std::cout << std::endl;
 		std::cout << "Cooking Time(min) : " << time << std::endl;
 		std::cout << "Direction : " << description << std::endl;
+	
 	}
 };
 

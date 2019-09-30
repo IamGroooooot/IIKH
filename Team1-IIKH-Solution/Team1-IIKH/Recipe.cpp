@@ -22,6 +22,10 @@ void RecipeDB::_save() {
 			ingredientBuffer += ",";
 		}
 		ingredientBuffer[ingredientBuffer.size() - 1] = '"';
+		// In case of Empty ingredient => should push one more "
+		if (ingredientBuffer.size() == 1) {
+			ingredientBuffer += '"';
+		}
 		line = record.second.getName() + ',';
 		line += record.second.getDescription() + ',';
 		line += std::to_string(record.second.getTime()) + ',';
