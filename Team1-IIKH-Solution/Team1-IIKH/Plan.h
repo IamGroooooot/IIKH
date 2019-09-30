@@ -43,6 +43,12 @@ public:
 		for (auto value : recipeNames)
 			res += value + ',';
 		res[res.size() - 1] = '"';
+
+		// In case of Empty Meal => should push one more "
+		if (res.size() == 1) {
+			res += '"';
+		}
+
 		return res;
 	}
 };

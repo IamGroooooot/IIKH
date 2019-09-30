@@ -13,22 +13,22 @@ RecipeDB::RecipeDB() {
 }
 
 void RecipeDB::_save() {
-	std::string ingre = {}, line = {};
+	std::string ingredientBuffer = {}, line = {};
 	std::vector<std::string> res;
 	for (auto record : db) {
-		ingre += '"';
+		ingredientBuffer += '"';
 		for (auto var : record.second.getIngredients()) {
-			ingre += var;
-			ingre += ",";
+			ingredientBuffer += var;
+			ingredientBuffer += ",";
 		}
-		ingre[ingre.size() - 1] = '"';
+		ingredientBuffer[ingredientBuffer.size() - 1] = '"';
 		line = record.second.getName() + ',';
 		line += record.second.getDescription() + ',';
 		line += std::to_string(record.second.getTime()) + ',';
-		line += ingre;
+		line += ingredientBuffer;
 		res.push_back(line);
 		line.erase();
-		ingre.erase();
+		ingredientBuffer.erase();
 	}
 	CSVParser::getInstance().write(std::string("RecipeDB.csv"), res);
 }

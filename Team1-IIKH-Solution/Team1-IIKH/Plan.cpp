@@ -7,11 +7,16 @@ PlanDB::PlanDB() {
 	for (auto record : DB) {
 		if (record.size() != 5) throw CSVParserException(0, "");
 		Date date(record[DATE].c_str());
-		this->_insert(date, Plan(record[NAME], {
-			Meal(split(record[BRACKFAST])),
-			Meal(split(record[LUNCH])),
-			Meal(split(record[DINNER])
-			) }));
+		this->_insert(
+			date, 
+			Plan( 
+				record[NAME], {
+					Meal(split(record[BRACKFAST])),
+					Meal(split(record[LUNCH])),
+					Meal(split(record[DINNER])) 
+				}
+			)
+		);
 	}
 }
 

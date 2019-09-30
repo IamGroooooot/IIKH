@@ -11,6 +11,14 @@ std::vector<std::vector<std::string>> CSVParser::read(std::string && name) {
 	std::vector<std::vector<std::string>> result = {};
 	std::vector<std::string> record = {};
 	bool IsDblDot = true;
+
+	// 파일이 없는 경우 새로 생성 후 열기
+	if (!file.is_open()) {
+		std::vector<std::string> empty;
+		write(std::string(name), empty);
+		return result;
+	}
+
 	while (!file.eof()) {
 		std::getline(file, line);
 		if (line.size() < 1) continue;

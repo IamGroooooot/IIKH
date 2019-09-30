@@ -53,16 +53,20 @@ public:
 	bool removeIngredient(std::string & n) { return ingredients.erase(n) == 1; }
 	// find if there is ingredient
 	bool searchIngredient(std::string & n) { return ingredients.find(n) != ingredients.end(); }
-	
+
 	// print Recipe data
 	void print() {
-		std::cout << "이름 : " << name << std::endl;
-		std::cout << "재료 : ";
+		std::cout << "Recipe Name : " << name << std::endl;
+		std::cout << "Ingredients : " << std::endl;
 		for (std::string s : ingredients)
-			std::cout << s << ' ';
+			std::cout << " - " << s << std::endl;
+		// new DEl
+		//CSVParser::
+		
+
 		std::cout << std::endl;
-		std::cout << "시간 : " << time << std::endl;
-		std::cout << "요리법 : " << description << std::endl;
+		std::cout << "Cooking Time(min) : " << time << std::endl;
+		std::cout << "Direction : " << description << std::endl;
 	}
 };
 

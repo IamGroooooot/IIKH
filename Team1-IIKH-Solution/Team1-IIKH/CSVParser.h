@@ -37,7 +37,7 @@ public:
 			std::cout << "File Column is incorrect" << std::endl;
 			break;
 		default:
-			std::cout << "unknown error" << std::endl;
+			std::cout << "Unknown Error" << std::endl;
 		}
 	}
 };

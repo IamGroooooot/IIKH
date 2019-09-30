@@ -32,21 +32,8 @@ int main() {
 
 		// waits for user to continue
 		system("pause");
-		//std::cout << "Press anykey to continue" << endl;
-		//std::cout << "" << std::flush;
-		//getchar();
-		//getchar();
+		
 	}
 	return 0;
 
-
-	try {
-		RecipeDB recipeDB;
-		for (auto record : recipeDB._search(std::string("RecipeN")))
-			recipeDB._show(record);
-		recipeDB._show(std::string("sfda"));
-	}
-	catch (Exception & e) {
-		e.resolve();
-	}
 }
