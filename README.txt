@@ -12,7 +12,7 @@
 [If you are not using VisualStudio 2019 or wanting to excute it in terminal]
 1. Change directory to excutable file. It is in "IIKH/Release/" and file name is "Team1-IIKH.exe"
 
-2. Just execute "Team1-IIKH.exe". You don't need another command.
+2. Just execute "Team1-IIKH.exe". You don't need any command.
  * the Input files are already in excutable file directory.
  * you can also delete all input file and execute. Then, if you view all recipe or plan, it is empty.
 

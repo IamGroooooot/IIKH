@@ -30,10 +30,11 @@ int main() {
 		greeter.selectMenu();
 
 		// waits for user to continue
-		std::cout << "Press anykey to continue" << endl;
-		std::cout << "" << std::flush;
-		getchar();
-		getchar();
+		system("pause");
+		//std::cout << "Press anykey to continue" << endl;
+		//std::cout << "" << std::flush;
+		//getchar();
+		//getchar();
 	}
 
 	return 0;
