@@ -5,7 +5,7 @@
 
 RecipeDB::RecipeDB() {
 	enum { NAME = 0, DESCRIPTION, TIME, INGREDIENT };
-	auto DB = CSVParser::getInstance().read(std::string("RecipeDB.csv"));
+	auto DB = CSVParser::getInstance().read(std::string("IIKHRecipeDB.csv"));
 	for (auto record : DB) {
 		if (record.size() != 4) throw CSVParserException(0, "");
 		this->_insert(record[NAME], Recipe(record[NAME], record[DESCRIPTION], std::atoi(record[TIME].c_str()), split(record[INGREDIENT])));
@@ -34,5 +34,5 @@ void RecipeDB::_save() {
 		line.erase();
 		ingredientBuffer.erase();
 	}
-	CSVParser::getInstance().write(std::string("RecipeDB.csv"), res);
+	CSVParser::getInstance().write(std::string("IIKHRecipeDB.csv"), res);
 }

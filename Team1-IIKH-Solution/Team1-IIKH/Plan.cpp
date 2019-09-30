@@ -3,7 +3,7 @@
 
 PlanDB::PlanDB() {
 	enum { NAME = 0, DATE, BRACKFAST, LUNCH, DINNER };
-	auto DB = CSVParser::getInstance().read(std::string("PlanDB.csv"));
+	auto DB = CSVParser::getInstance().read(std::string("IIKHPlanDB.csv"));
 	for (auto record : DB) {
 		if (record.size() != 5) throw CSVParserException(0, "");
 		Date date(record[DATE].c_str());
@@ -32,5 +32,5 @@ void PlanDB::_save() {
 		line += record.second.getDinner().toString();
 		res.push_back(line);
 	}
-	CSVParser::getInstance().write(std::string("PlanDB.csv"), res);
+	CSVParser::getInstance().write(std::string("IIKHPlanDB.csv"), res);
 }
