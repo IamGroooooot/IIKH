@@ -1,10 +1,10 @@
 ﻿# How to use executable file.
-### You can run it in Windows.
+### Recommended OS is Windows 10.
 
 [If you are using VisualStudio 2019]
 1. Open IIKH/Team1-IIKH-Solution/Team1-IIKH-Solution.sln solution file.
 
-2. Start with no debuging(디버그하지 않고 시작) [Ctrl-F5]
+2. Execute program with no debuging(디버그하지 않고 시작) mode [Ctrl-F5]
 
 3. Read below [Important] tag description and Enjoy :)
 
@@ -24,7 +24,6 @@
  * DB files are created in project directory(IIKH/Team1-IIKH-Solution/Team1-IIKH/).
  * DB files are named(IIKHPlanDB.csv, IIKHRecipeDB.csv) and you can open it by Excel.
 
-
-
+---
 # Where is report?
  * IIKH/"IIKH Report.pdf"
