@@ -37,7 +37,7 @@
         
         
           
-          <span class="label label-info"><a href='cf9c8b720f3815adeccaf3ef6e48c6c4.html'><span class='node-icon staruml-icon icon-Project'></span>Untitled</a></span>
+          <span class="label label-info"><a href='cf9c8b720f3815adeccaf3ef6e48c6c4.html'><span class='node-icon staruml-icon icon-Project'></span>IIKH</a></span>
         
           <span>::</span>
           <span class="label label-info"><a href='594af663de577680f35b13183109d675.html'><span class='node-icon staruml-icon icon-UMLModel'></span>Model</a></span>
@@ -143,15 +143,15 @@
           
           <tr>
             <td>private</td>
-            <td><a href="4d39c55e31e7dcdc8772a8f710b717c0.html">rootPath</a></td>
-            <td>std::string</td>
+            <td><a href="4d39c55e31e7dcdc8772a8f710b717c0.html">instance</a></td>
+            <td>CSVParser*</td>
             <td></td>
           </tr>
           
           <tr>
             <td>private</td>
-            <td><a href="5fc0af2a98e809ebfb57cbc395674e3c.html">delimiter</a></td>
-            <td>char</td>
+            <td><a href="5fc0af2a98e809ebfb57cbc395674e3c.html">isAllocated</a></td>
+            <td>bool</td>
             <td></td>
           </tr>
           
@@ -172,14 +172,32 @@
           </tr>
           
           <tr>
-            <td>private</td>
-            <td><a href="87176a5cdec722df099f766c1aaa9cdd.html">split(string, char, int)</a></td>
+            <td>public</td>
+            <td><a href="87176a5cdec722df099f766c1aaa9cdd.html">split(str: std::string&amp;)</a></td>
             <td></td>
           </tr>
           
           <tr>
             <td>public</td>
-            <td><a href="13915c042251acce8d576545ebe64c77.html">write(filename: string, data: std::vector&lt;std::map&lt;std::string, std::string&gt;*&gt;)</a></td>
+            <td><a href="13915c042251acce8d576545ebe64c77.html">write(name: std::string&amp;&amp;, value: std::vector&lt;std::string&gt;&amp;)</a></td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>public</td>
+            <td><a href="0bffe6682aaea71427e79fdf94082437.html">getInstance()</a></td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>public</td>
+            <td><a href="dc78e5936710e944b3543ff0bc04744c.html">deleteInstance()</a></td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>public</td>
+            <td><a href="2831a9c016d34908a9bde2e809249e9b.html">read(name: std::string&amp;&amp;)</a></td>
             <td></td>
           </tr>
           
@@ -379,6 +397,15 @@
 
         
         
+<section class="element-list">
+    <h3>Dependants</h3>
+    <ul class="nav nav-list">
+        
+        <li><a href='5dbba3a7b38d3af06a67bdee89ce7f08.html'><span class='node-icon staruml-icon icon-UMLClass'></span>CSVParserException</a></li>
+        
+    </ul>
+</section>
+
 
       
 
@@ -386,6 +413,15 @@
 
       
       
+<section class="element-list">
+    <h3>Relationships</h3>
+    <ul class="nav nav-list">
+        
+        <li><a href='fe6e43ffd3db813b2f64b58633249981.html'><span class='node-icon staruml-icon icon-UMLDependency'></span>(CSVParserException→CSVParser)</a></li>
+        
+    </ul>
+</section>
+
 
 
       <!-- Owned Elements -->
